@@ -1,0 +1,79 @@
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#mapParent {
+    position: relative;
+    height: 90%;
+    border-bottom: solid 2pt #1DB954;
+}
+
+#mapButtons {
+    position: absolute;
+    z-index: 2;
+    top: 40%;
+    left: 50%;
+    margin-left: -175px;
+}
+
+.btn-lg {
+    margin: 10px;
+    font-weight: bold;
+    color: white;
+    border: solid 1pt;
+    /* probably dont need this many box shadow properties */
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#startRide {
+    background-color: #1DB954;
+}
+
+#startRide:active {
+    background-color: #147A38;
+}
+
+#findRide {
+    background-color: #16C7B8;
+}
+
+#findRide:active {
+    background-color: #0F877D;
+}
+
+h1 {
+    text-align: center;
+    background-color: #1DB954;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+    border-bottom: solid 2pt white;
+}
+
+.pac-container {
+    z-index: 10000 !important;
+}
+
+#goButton {
+    background-color: #1DB954;
+}
+
+#cancelButton {
+    background-color: black;
+    color: white;
+}
+
+#destinationSearch:focus {
+    outline: #1DB954;
+}
