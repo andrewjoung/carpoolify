@@ -13,6 +13,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
   <link rel="stylesheet" href="style.css">
 
   <title>Rideshare Login</title>
@@ -20,11 +21,10 @@
 
 <body>
 
-  <header id= "header-tag">
-    <img src="images/download.jpg">
-    <h1 id= "header-label" >Carpoolify</h1>
+  <header id="header-tag">
+    <h1 id="header-label">carpoolify</h1>
   </header>
-  
+
   <!-- Material form login -->
 
   <div class="container">
@@ -49,12 +49,13 @@
       </div>
 
       <!-- Sign in button -->
-      <button id="sign-in" class="btn btn-block my-4" type="button">Sign in</button>
+      <a id="log-in" href="#"><button id="sign-in" class="btn btn-block my-4 btn-sign-in" type="button">Sign in</button></a>
 
       <!-- Register -->
       <p>Not a member?
         <a href="linked.html">Register</a>
       </p>
+      <!-- <input id="search-text-field" type="text"> -->
 
       <!-- Social login -->
 
