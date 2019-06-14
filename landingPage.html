@@ -19,6 +19,7 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script> -->
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -67,16 +68,13 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="">
-                        <!-- Search form -->
-                        <input id="destinationSearch" class="form-control" type="text" placeholder="Search"
-                            aria-label="Search">
-                    </form>
+                    <input id="destinationSearch" class="form-control" type="text" placeholder="Search"
+                        aria-label="Search">
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Go</button>
+                    <button id="cancelButton" type="button" class="btn" data-dismiss="modal">Cancel</button>
+                    <button id="goButton" type="button" class="btn">Go</button>
                 </div>
 
             </div>
@@ -85,8 +83,9 @@
 
     <script src="map.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places">
-        </script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places"></script>
+    </script>
+
 
 </body>
 
