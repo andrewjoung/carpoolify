@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Rideshare Login</title>
+</head>
+
+<body>
+
+  <header id= "header-tag">
+    <img src="images/download.jpg">
+    <h1 id= "header-label" >Carpoolify</h1>
+  </header>
+  
+  <!-- Material form login -->
+
+  <div class="container">
+
+    <!-- Default form login -->
+    <form class="text-center border border-light p-5">
+
+      <p id="change-title-sign-in" class="h4 mb-4">Sign in</p>
+
+      <!-- Email -->
+      <input type="email" id="userName" class="form-control mb-4" placeholder="Username">
+
+      <!-- Password -->
+      <input type="password" id="user-password" class="form-control mb-4" placeholder="Password">
+
+      <div class="d-flex justify-content-around">
+
+        <div>
+          <!-- Forgot password -->
+          <a href="">Forgot password?</a>
+        </div>
+      </div>
+
+      <!-- Sign in button -->
+      <button id="sign-in" class="btn btn-block my-4" type="button">Sign in</button>
+
+      <!-- Register -->
+      <p>Not a member?
+        <a href="linked.html">Register</a>
+      </p>
+
+      <!-- Social login -->
+
+
+    </form>
+    <!-- Default form login -->
+  </div>
+
+
+  <!-- Material form login -->
+
+  <!-- <header>
+    <h1>Basic Rideshare User Login Area</h1>
+  </header>
+
+  <div class="container">
+
+
+
+
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your personal infomation</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div> -->
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
+      authDomain: "rideshare-fe506.firebaseapp.com",
+      databaseURL: "https://rideshare-fe506.firebaseio.com",
+      projectId: "rideshare-fe506",
+      storageBucket: "rideshare-fe506.appspot.com",
+      messagingSenderId: "611609382463",
+      appId: "1:611609382463:web:6b761d7c73c33300"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>
