@@ -78,8 +78,10 @@ let checkUserName = () => {
 
     else if (count === 1 && looper === 1) {
       // document.getElementById("sign-in").disabled = true
+      document.getElementById("submit-button").disabled=true;
+
       $(".container").attr("id", "shake-me")
-      $("#change-title").text("Please Choose a Different Username")
+      $("#change-title").text("Username is Unavailable")
       $("#change-title").css("color", "red")
       $("#transfer-button").attr("href", "#")
       $("#registerFirstName").val()
@@ -102,6 +104,7 @@ let checkUserName = () => {
 
       }, 1000)
       setTimeout(function () {
+        document.getElementById("submit-button").disabled=false;
         $("#change-title").css("color", "#1DB954")
         $("#change-title").text("Sign Up")
       }, 2000)
@@ -143,6 +146,7 @@ let checkSignIn = () => {
 
     }
     setTimeout(function () {
+      document.getElementById("sign-in").disabled=true;
       $(".container").attr("id", "shake-me")
       $("#change-title-sign-in").text("Incorrect Username Or Password")
       $("#change-title-sign-in").css("color", "red")
@@ -157,6 +161,7 @@ let checkSignIn = () => {
 
       }, 1000)
       setTimeout(function () {
+        document.getElementById("sign-in").disabled=false;
         $("#change-title-sign-in").css("color", "#1DB954")
         $("#change-title-sign-in").text("Sign Up")
 
