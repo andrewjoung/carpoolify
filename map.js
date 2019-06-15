@@ -1,4 +1,3 @@
-
 var infoWindow;
 var lat;
 var long;
@@ -44,22 +43,6 @@ function initMap() {
 
     google.maps.event.addDomListener(window, "load", initializeAutocomplete);
 
-    $("#goButton").on("click", function() {
-        $("#mapButtons").css("display", "none");
-        
-        var request = {
-            origin: pos.lat + "," + pos.lng,
-            destination: lat + "," + long,
-            travelMode: 'DRIVING'
-        };
-        directionsService.route(request, function (response, status) {
-            if (status == 'OK') {
-                directionDisplay.setDirections(response);
-            }
-        });
-    });
-
-
     infoWindow = new google.maps.InfoWindow;
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -68,7 +51,7 @@ function initMap() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            console.log(navigator.geolocation);
+            //console.log(navigator.geolocation);
             console.log(position);
             console.log("current lat: " + pos.lat, "current long:" + pos.lng);
 
@@ -93,4 +76,19 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+$("#goButton").on("click", function () {
+    $("#mapButtons").css("display", "none");
+
+    var request = {
+        origin: pos.lat + "," + pos.lng,
+        destination: lat + "," + long,
+        travelMode: 'DRIVING'
+    };
+    directionsService.route(request, function (response, status) {
+        if (status == 'OK') {
+            directionDisplay.setDirections(response);
+        }
+    });
+});
 
