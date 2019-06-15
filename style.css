@@ -35,7 +35,7 @@ a{
 
 #shake-me{
   animation: shake 1s;
-  animation-iteration-count: 1;
+  animation-iteration-count: infinite;
 
 
 }

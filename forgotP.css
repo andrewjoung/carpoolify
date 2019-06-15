@@ -1,41 +1,84 @@
-#header-tag{
- 
-  color:black;
-  background:#1DB954;
-  text-align: center;
+.container{
+  width: 80vw;
+ margin-top: 10vh;
 }
+
+.card{
+ margin-top:6vh;
+}
+
+.card-header{
+ background:#000000;
+ color:#1DB954;
+
+}
+
+form{
+background: #000000;
+color:#1DB954;
+opacity:0.85;
+border-radius: 1%
+}
+
+.btn{
+ background:#1DB954;
+ color:white;
+}
+
+.btn:hover{
+color:black;
+}
+
+a{
+ color:white;
+}
+
+
+#header-tag{
+
+ color:black;
+ background:#1DB954;
+ text-align: center;
+}
+
+body{
+ 
+background: white;
+   
+} 
+
 
 #header-label{
-  padding-left: 25px;
-  font-weight: 300;
-  font-size:65px;
-  margin:0 auto;
+ padding-left: 25px;
+ font-weight: 300;
+ font-size:65px;
+ margin:0 auto;
 }
 
-#password-container{
-  margin-top:5vh;
-  background:black;
-  color:#1DB954;
-  border-radius:1%;
+#shake-me{
+  animation: shake 1s;
+  animation-iteration-count: 1;
+
+
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-#password-reset-button{
-  background:#1DB954;
-  color:white;
+#change-header{
+  color:#1DB954
 }
 
-#password-reset-button:hover{
-  color:black
+#displayPassword{
+  display:none;
 }
-
-.h4{
-  font-size:40px;
-  font-weight:700;
-  padding:20px;
-}
-
-input{
-  padding-top:20px;
-  padding-bottom:20px;
-}
-

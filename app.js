@@ -82,6 +82,19 @@ let checkUserName = () => {
       $("#change-title").text("Please Choose a Different Username")
       $("#change-title").css("color", "red")
       $("#transfer-button").attr("href", "#")
+      $("#registerFirstName").val()
+      let lastName = $("#registerLastName").val()
+
+      //Reset all text fields to empty
+      $("#registerEmail").val('')
+      $("#registerPassword").val('')
+      $("#registerAddress").val('')
+      $("#registerCity").val('')
+      $("#registerState").val('')
+      $("#registerPhone").val('')
+      $("#registerUserName").val('')
+      $("#registerFirstName").val('')
+      $("#registerLastName").val('')
       setTimeout(function () {
         // document.getElementById("sign-in").disabled = false
         $(".container").attr("id", "")
@@ -134,6 +147,9 @@ let checkSignIn = () => {
       $("#change-title-sign-in").text("Incorrect Username Or Password")
       $("#change-title-sign-in").css("color", "red")
       $("#transfer-button").attr("href", "#")
+      $("#userName").val('')
+      $("#user-password").val('')
+
       setTimeout(function () {
         $(".container").attr("id", "")
         // document.getElementById("sign-in").disabled = false

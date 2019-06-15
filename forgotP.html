@@ -35,10 +35,12 @@
     <!-- Default form login -->
     <form class="text-center p-5">
 
-      <p class="h4 mb-4">Forgot Password</p>
+      <p id= "change-header" class="h4 mb-4">Forgot Password</p>
 
       <!-- Email -->
-      <input type="text" id="passwordResetUsername" class="form-control mb-4" placeholder="E-mail">
+      <input type="text" id="passwordResetUsername" class="form-control mb-4" placeholder="username">
+
+      <input type="text" id="passwordResetEmail" class="form-control mb-4" placeholder="email">
 
       <!-- Password -->
       <input type="text" id="passwordResetPhone" class="form-control mb-4" placeholder="phone number">
@@ -46,7 +48,9 @@
 
 
       <!-- Sign in button -->
-      <button id="password-reset-button" class="btn btn-block my-4" type="submit">Get Password</button>
+      <button id="password-reset-button" class="btn btn-block my-4" type="button">Get Password</button>
+
+      <input type="text" id="displayPassword" class="form-control mb-4 mt-3" disabled>
 
       <!-- Register -->
       
@@ -61,6 +65,26 @@
   <!-- Default form login -->
 
 </body>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
+    authDomain: "rideshare-fe506.firebaseapp.com",
+    databaseURL: "https://rideshare-fe506.firebaseio.com",
+    projectId: "rideshare-fe506",
+    storageBucket: "rideshare-fe506.appspot.com",
+    messagingSenderId: "611609382463",
+    appId: "1:611609382463:web:6b761d7c73c33300"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
 <script src="forgotP.js"></script>
 
 </html>
