@@ -1,0 +1,41 @@
+#header-tag{
+ 
+  color:black;
+  background:#1DB954;
+  text-align: center;
+}
+
+#header-label{
+  padding-left: 25px;
+  font-weight: 300;
+  font-size:65px;
+  margin:0 auto;
+}
+
+#password-container{
+  margin-top:5vh;
+  background:black;
+  color:#1DB954;
+  border-radius:1%;
+}
+
+#password-reset-button{
+  background:#1DB954;
+  color:white;
+}
+
+#password-reset-button:hover{
+  color:black
+}
+
+.h4{
+  font-size:40px;
+  font-weight:700;
+  padding:20px;
+}
+
+input{
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
