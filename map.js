@@ -1,8 +1,14 @@
 var infoWindow;
-var lat;
-var long;
+
+var originLat;
+var originLong;
+var destLat;
+var destLong;
+
 var directionsService;
 var directionDisplay;
+
+var distance;
 var pos;
 
 var role;
@@ -13,6 +19,7 @@ function initMap() {
         zoom: 18,
         disableDefaultUI: true,
         styles: [
+            // refactor these styling calls
             { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
             { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#1DB954" }] },
             { featureType: "road", elementType: "geometry.stroke", stylers: [{ weight: "1" }] },
@@ -28,15 +35,18 @@ function initMap() {
         polylineOptions: { strokeColor: "#191414" }
     });
 
+    // TODO: Account for the fact that unless the user actually clicks one of the autocomplete suggestions, nothing is passed to this to get the dest. lat/long
     function initializeAutocomplete() {
         var input = document.getElementById('destinationSearch');
+        //var input = $("#destinationSearch");
         var autocomplete = new google.maps.places.Autocomplete(input);
+
         google.maps.event.addListener(autocomplete, "place_changed", function () {
             var place = autocomplete.getPlace();
-            console.log(place);
-            lat = place.geometry.location.lat();
-            long = place.geometry.location.lng();
-            console.log("lat: " + lat, "long: " + long);
+            // console.log(place);
+            destLat = place.geometry.location.lat();
+            destLong = place.geometry.location.lng();
+            console.log("destination lat: " + destLat, "destination long: " + destLong);
             $("#goButton").attr("data-dismiss", "modal");
         })
     }
@@ -52,8 +62,10 @@ function initMap() {
                 lng: position.coords.longitude
             };
             //console.log(navigator.geolocation);
-            console.log(position);
-            console.log("current lat: " + pos.lat, "current long:" + pos.lng);
+            //console.log(position);
+            originLat = pos.lat;
+            originLong = pos.lng;
+            console.log("origin lat: " + originLat, "origin long:" + originLong);
 
             //infoWindow.setPosition(pos);
             //infoWindow.setContent('Location found.');
@@ -80,9 +92,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 $("#goButton").on("click", function () {
     $("#mapButtons").css("display", "none");
 
+    // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
     var request = {
-        origin: pos.lat + "," + pos.lng,
-        destination: lat + "," + long,
+        origin: originLat + "," + originLong,
+        destination: destLat + "," + destLong,
         travelMode: 'DRIVING'
     };
     directionsService.route(request, function (response, status) {
@@ -90,5 +103,16 @@ $("#goButton").on("click", function () {
             directionDisplay.setDirections(response);
         }
     });
+});
+
+// records whether driver or passenger and prompts for address
+$(".btn-lg").on("click", function() {
+    var id = $(this).attr("id");
+    if (id === "startRide") {
+        role = "driver";
+    } else if (id === "findRide") {
+        role = "passenger";
+    }
+    console.log(role);
 });
 
