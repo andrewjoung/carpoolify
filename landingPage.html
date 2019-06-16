@@ -10,6 +10,8 @@
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -42,7 +44,7 @@
         <div id="mapButtons">
             <button id="startRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">START A
                 RIDE</button>
-            <button id="findRide" class="btn-lg">FIND A RIDE</button>
+            <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A RIDE</button>
         </div>
     </div>
 
@@ -76,11 +78,12 @@
         </div>
     </div>
 
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places,geometry"></script>
+    </script>
     <script src="map.js"></script>
     <script src="logPassenger.js"></script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places"></script>
-    </script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&libraries=geometry"></script> -->
 
 
 </body>
