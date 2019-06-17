@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <title>Rideshare Login</title>
+</head>
+
+<body>
+
+  <header id="header-tag">
+    <h1 id="header-label">carpoolify</h1>
+  </header>
+
+
+  <div class="container">
+
+    <form class="text-center border border-light p-5">
+
+      <p id="change-title" class="h4 mb-4">Sign Up</p>
+
+      <div class="form-row mb-4">
+        <div class="col">
+          <!-- First name -->
+          <input type="text" id="registerFirstName" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+          <!-- Last name -->
+          <input type="text" id="registerLastName" class="form-control" placeholder="Last name">
+        </div>
+      </div>
+
+      <input type="text" id="registerUserName" class="form-control mb-4"
+        placeholder=" Desired username (No spaces or special characters)">
+
+      <!-- E-mail -->
+      <input type="email" id="registerEmail" class="form-control mb-4" placeholder="E-mail">
+
+      <!-- Password -->
+      <input type="password" id="registerPassword" class="form-control" placeholder="Password"
+        aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+      <!--Address block of code-->
+      <div class="form-row">
+        <div class="col-md-8">
+          <input type="address" id="registerAddress" class="form-control mt-3" placeholder="Address"
+            aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        </div>
+        <div class="col-md-2">
+          <input id="registerCity" type="text" class="form-control mt-3" placeholder="city">
+        </div>
+        <div class="col-md-2">
+          <input id="registerState" type="text" class="form-control mt-3" placeholder="state">
+        </div>
+      </div>
+
+
+      <!-- Phone number -->
+      <input type="text" id="registerPhone" class="form-control mt-4" placeholder="Phone number"
+        aria-describedby="defaultRegisterFormPhoneHelpBlock">
+
+
+      <label for="driverCheckbox">Interested in becoming a Driver?</label>
+      <input type="checkbox" name="checkBox" id="driverCheckbox" onclick="checkedDriver()">
+
+      <!--Hidden group that will show only fi beckbox clicked-->
+      <div class="input-hidden">
+        <div class="form-row">
+
+          <div class="col-md-3">
+            <input type="" id="registerMake" class="form-control mt-3" placeholder="car make"
+              aria-describedby="defaultRegisterFormPasswordHelpBlock">
+          </div>
+          <div class="col-md-3">
+            <input id="registerModel" type="text" class="form-control mt-3" placeholder="car model">
+          </div>
+          <div class="col-md-3">
+            <input id="registeryear" type="text" class="form-control mt-3" placeholder="car year">
+          </div>
+
+          <div class="col-md-3">
+            <input id="registerMPG" type="text" class="form-control mt-3" placeholder="MPG">
+          </div>
+
+          <input type="text" id="registerLicense" class="form-control mt-4" placeholder="license #">
+
+        </div>
+      </div>
+
+      <button id="submit-button" type="button" class="mt-4 btn btn-block">Sign Up</button>
+      <p>By clicking
+        <em>Sign up</em> you agree to our
+        <a href="index.html">terms of service</a>
+
+    </form>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- Newsletter -->
+
+
+  <!-- Sign up button -->
+
+
+  <!-- Social register -->
+  <hr>
+
+  <!-- Terms of service -->
+
+  </div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
+      authDomain: "rideshare-fe506.firebaseapp.com",
+      databaseURL: "https://rideshare-fe506.firebaseio.com",
+      projectId: "rideshare-fe506",
+      storageBucket: "rideshare-fe506.appspot.com",
+      messagingSenderId: "611609382463",
+      appId: "1:611609382463:web:6b761d7c73c33300"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="app.js"></script>
+</body>
+
+</html>

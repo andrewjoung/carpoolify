@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Carpoolify</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script> -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style_lp.css">
+
+
+</head>
+
+<body>
+    <h1>carpoolify</h1>
+    <div id="mapParent">
+        <div id="map"></div>
+        <div id="mapButtons">
+            <button id="startRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">START A
+                RIDE</button>
+            <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A RIDE</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+
+    <div class="modal fade" id="destinationAddressModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Enter Destination</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <input id="destinationSearch" class="form-control" type="text" placeholder="Search"
+                        aria-label="Search">
+                </div>
+
+                <div class="modal-footer">
+                    <button id="cancelButton" type="button" class="btn" data-dismiss="modal">Cancel</button>
+                    <button id="goButton" type="button" class="btn">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="driverInfoInputModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Enter Ride Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <label for="departureTime">Set Departure Time:</label>
+                    <input id="departureTime" class="form-control" type="time" placeholder="" aria-label="Search" required>
+                    <label for="pickupRange">Pickup Range (miles)</label>
+                    <input id="pickupRange" class="form-control" type="number" step="0.01" min="0" placeholder="ex: .25" aria-label="Search" required>
+                    <label for="availableSeats">Seats Available</label>
+                    <input id="availableSeats" class="form-control" type="number" min="1" placeholder="3" aria-label="Search" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="driverCancelButton" type="button" class="btn" data-dismiss="modal">Cancel</button>
+                    <button id="driverSubmitRide" type="button" class="btn">Open Ride</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places,geometry"></script>
+    </script>
+    <script src="map.js"></script>
+    <script src="logPassenger.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&libraries=geometry"></script> -->
+
+
+</body>
+
+</html>
