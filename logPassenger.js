@@ -46,11 +46,26 @@ function promptDriverInput() {
 // code out when user flow is finished
 function plotAndStartRoute() {
     // hide waiting for riders
+    console.log("hopefully this gets called afterward the submit ride button is pressed");
+
+    var request = {
+        origin: originLat + "," + originLong,
+        destination: destLat + "," + destLong,
+        travelMode: 'DRIVING'
+    };
+
+    directionsService.route(request, function (response, status) {
+        if (status == 'OK') {
+            directionDisplay.setDirections(response);
+        }
+    });
+
 }
 
 // handle edge cases
 $("#driverSubmitRide").on("click", function() {
     // TODO: Ensure that user is inputting correctly formatted data ie '.25' for range instead of '1/4'
+    $("#mapButtons").css("display", "none");
 
     departureTime = $("#departureTime").val();    
     // convert miles input my user to meters
@@ -81,13 +96,36 @@ $("#driverSubmitRide").on("click", function() {
     // get current time
     // difference between current time and departure time
     // set timeout to the length of the difference and run function on timeout
-    var currentTime = moment();
-    console.log(moment(currentTime).format("hh:mm"));
 
-    plotAndStartRoute();
+    //to test whenever the driver database is changed 
+    database.ref("drivers/Tyrion").on("value", function(snapshot){
+
+        var currentTime = moment();
+        var driverSet = snapshot.val();
+        var departureTime = driverSet.dbDepartTime;
+
+        console.log("departure time: " + departureTime);
+        console.log("current time: " + moment(currentTime).format("hh:mm"));
+        console.log(typeof(departureTime));
+
+        var departureTimeConverted = moment(departureTime, "hh:mm").subtract();
+
+        console.log(departureTimeConverted);
+
+        //difference between time in milliseconds
+        var timeWindow = moment(departureTimeConverted).diff(moment(), "milliseconds");
+
+        var plotAndStartRouteTimeout = setTimeout(plotAndStartRoute, timeWindow);
+
+        console.log(timeWindow);
+
+    });
 
     $('#driverInfoInputModal').modal('hide');
 });
+
+
+
 
 //---------------------------------------------------------------
 // passenger flow
