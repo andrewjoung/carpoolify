@@ -10,7 +10,7 @@ let database = firebase.database()
 
 // Checks Username upon registering. Will return either true or false
 let checkUserName = () => {
-
+  let driver;
   let firstName = $("#registerFirstName").val()
   let lastName = $("#registerLastName").val()
   let email = $("#registerEmail").val()
@@ -25,6 +25,14 @@ let checkUserName = () => {
   let make = $("#registerMake").val()
   let model = $("#registerModel").val();
   let year = $("#registeryear").val();
+  if($('input[name="checkbox"]').is(":checked")){
+    driver = true;
+
+  }
+
+  else{
+    driver = false
+  }
 
   setUsername(userName)
 
@@ -86,12 +94,12 @@ let checkUserName = () => {
           city: city,
           state: state,
           phone: phone,
-          driver: "",
           license: license,
           carMake: make,
           carModel:model,
           MPG: MPG,
-          year:year
+          year:year,
+          driver:driver
 
 
 
