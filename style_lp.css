@@ -65,11 +65,11 @@ h1 {
     z-index: 10000 !important;
 }
 
-#goButton {
+#goButton, #driverSubmitRide {
     background-color: #1DB954;
 }
 
-#cancelButton {
+#cancelButton, #driverCancelButton {
     background-color: black;
     color: white;
 }

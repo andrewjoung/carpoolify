@@ -5,6 +5,10 @@ var originLong;
 var destLat;
 var destLong;
 
+var departureTime;
+var pickupRange;
+var seatsAvailable;
+
 var directionsService;
 var directionDisplay;
 
