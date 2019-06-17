@@ -63,7 +63,7 @@ let checkUserName = () => {
     let count = 0;
     let looper = 0;
 
-    database.ref().on("value", function (data) {
+    database.ref("accounts").on("value", function (data) {
 
       looper++
 
@@ -83,7 +83,7 @@ let checkUserName = () => {
       if (count === 0) {
         // console.log("pushing")
 
-        database.ref(userName).push({
+        database.ref("accounts").child(userName).push({
 
           firstName: firstName,
           lastName: lastName,
@@ -161,14 +161,15 @@ let checkSignIn = () => {
 
 
 
-  database.ref().on("value", function (data) {
+  database.ref("accounts").on("value", function (data) {
     let keys = Object.keys(data.val());
+    console.log(keys)
     for (var i = 0; i < keys.length; i++) {
       // console.log(keys)
       // console.log(userSignIn)
       if (userSignIn == keys[i]) {
 
-        database.ref(userSignIn).on("value", function (data) {
+        database.ref("accounts").child(userSignIn).on("value", function (data) {
           let userKeysArray = Object.keys(data.val())
           console.log(data.val()[userKeysArray[0]].password)
           console.log(userPassword)
@@ -270,6 +271,20 @@ let fillUserName = () => {
 
 fillUserName()
 
+
+$("#driverSubmitRide").on("click", function(){
+  console.log("working")
+  let username = localStorage.getItem("username")
+  let time = $("#departureTime").val().trim();
+  let range = $("#pickupRange").val().trim();
+  let seats = $("#availableSeats").val().trim();
+
+  database.ref("drivers").child(username).set({
+    time:time,
+    range:range,
+    seats:seats
+  })
+})
 
 
 
