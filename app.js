@@ -20,6 +20,11 @@ let checkUserName = () => {
   let state = $("#registerState").val()
   let phone = $("#registerPhone").val()
   let userName = $("#registerUserName").val()
+  let license = $("#registerLicense").val()
+  let MPG = $("#registerMPG").val()
+  let make = $("#registerMake").val()
+  let model = $("#registerModel").val();
+  let year = $("#registeryear").val();
 
   setUsername(userName)
 
@@ -82,11 +87,11 @@ let checkUserName = () => {
           state: state,
           phone: phone,
           driver: "",
-          license: "",
-          carMake: "",
-          carModel: "",
-          carMileage: "",
-          MPG: ""
+          license: license,
+          carMake: make,
+          carModel:model,
+          MPG: MPG,
+          year:year
 
 
 
