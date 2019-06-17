@@ -1,16 +1,16 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
-    authDomain: "carpoolify.firebaseapp.com",
-    databaseURL: "https://carpoolify.firebaseio.com",
-    projectId: "carpoolify",
-    storageBucket: "",
-    messagingSenderId: "144701142261",
-    appId: "1:144701142261:web:8eb8f2f55b5181ac"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// var firebaseConfig = {
+//     apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
+//     authDomain: "carpoolify.firebaseapp.com",
+//     databaseURL: "https://carpoolify.firebaseio.com",
+//     projectId: "carpoolify",
+//     storageBucket: "",
+//     messagingSenderId: "144701142261",
+//     appId: "1:144701142261:web:8eb8f2f55b5181ac"
+// };
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
 
-var database = firebase.database();
+// var database = firebase.database();
 
 // firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
@@ -46,20 +46,20 @@ function promptDriverInput() {
 
 // executes when the departure time the user entered is reached
 // code out when user flow is finished
-function plotAndStartRoute() {
-    // hide waiting for riders
-}
+// function plotAndStartRoute() {
+//     // hide waiting for riders
+// }
 
-// handle edge cases
-$("#driverSubmitRide").on("click", function() {
-    // TODO: Ensure that user is inputting correctly formatted data ie '.25' for range instead of '1/4'
+// // handle edge cases
+// $("#driverSubmitRide").on("click", function() {
+//     // TODO: Ensure that user is inputting correctly formatted data ie '.25' for range instead of '1/4'
 
-    departureTime = $("#departureTime").val();    
-    // convert miles input my user to meters
-    pickupRange = parseFloat($("#pickupRange").val()) * 1609.344;
-    pickupRange = parseInt(pickupRange.toFixed(0));
-    seatsAvailable = parseInt($("#availableSeats").val());
-    console.log("depart: " + departureTime + " pickup range: " + pickupRange + " available seats: " + seatsAvailable);
+//     departureTime = $("#departureTime").val();    
+//     // convert miles input my user to meters
+//     pickupRange = parseFloat($("#pickupRange").val()) * 1609.344;
+//     pickupRange = parseInt(pickupRange.toFixed(0));
+//     seatsAvailable = parseInt($("#availableSeats").val());
+//     console.log("depart: " + departureTime + " pickup range: " + pickupRange + " available seats: " + seatsAvailable);
     
     // "passengers" should be the 'role' variable - either 'driver' or 'passenger', so that when they click
     // go after selecting their destination, they're added to the appropriate object list in firebase
@@ -79,16 +79,16 @@ $("#driverSubmitRide").on("click", function() {
         // dbWaypoints: waypoints
     });    
     
-    // get current time
-    // difference between current time and departure time
-    // set timeout to the length of the difference and run function on timeout
-    plotAndStartRoute();
+//     // get current time
+//     // difference between current time and departure time
+//     // set timeout to the length of the difference and run function on timeout
+//     plotAndStartRoute();
 
-    $('#driverInfoInputModal').modal('hide');
-});
+//     $('#driverInfoInputModal').modal('hide');
+// });
 
-//---------------------------------------------------------------
-// passenger flow
+// //---------------------------------------------------------------
+// // passenger flow
 
 //
 function passengerFlow() {
