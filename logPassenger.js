@@ -136,6 +136,10 @@ $("#driverSubmitRide").on("click", function() {
 //loop through the users that have jumped into the car 
 $("#showPassengersButton").on("click",function(){
 
+
+    $("#waitingForPassengerModal").modal("show");
+
+
 });
 
 
