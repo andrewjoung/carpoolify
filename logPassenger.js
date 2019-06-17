@@ -48,6 +48,9 @@ function plotAndStartRoute() {
     // hide waiting for riders
     console.log("hopefully this gets called afterward the submit ride button is pressed");
 
+    $("#showPassengers").css("display", "none");
+    $("#waitingForPassengerModal").modal("hide");
+
     var request = {
         origin: originLat + "," + originLong,
         destination: destLat + "," + destLong,
@@ -121,9 +124,19 @@ $("#driverSubmitRide").on("click", function() {
 
     });
 
+    //TODO
+    //show modal showing information about driver car information
+    // ==> when riders join
+    
+
     $('#driverInfoInputModal').modal('hide');
+    $("#showPassengersButton").css("display", "block");
 });
 
+//loop through the users that have jumped into the car 
+$("#showPassengersButton").on("click",function(){
+
+});
 
 
 

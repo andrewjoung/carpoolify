@@ -49,6 +49,11 @@
                 RIDE</button>
             <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A RIDE</button>
         </div>
+
+        <!-- trigger show passenger modal -->
+        <button type="button" id="showPassengersButton" class="btn" data-toggle="modal">
+            Show Passengers
+        </button>
     </div>
 
     <!-- Modals -->
@@ -102,6 +107,28 @@
                 <div class="modal-footer">
                     <button id="driverCancelButton" type="button" class="btn" data-dismiss="modal">Cancel</button>
                     <button id="driverSubmitRide" type="button" class="btn">Open Ride</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for whe driver is waiting for passengers-->
+    <div class="modal fade" id="waitingForPassengerModal" tabindex="-1" role="dialog" aria-labelledby="waitingForPassengers"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Waiting for Passengers</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="waitingForPassengerContent">
+                    need some information about passengers and what not
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
