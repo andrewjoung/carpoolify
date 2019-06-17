@@ -1,5 +1,6 @@
 
 let looper = 0
+let j = 0;
 
 let database = firebase.database()
 
@@ -26,82 +27,132 @@ let checkUserName = () => {
   let state = $("#registerState").val()
   let phone = $("#registerPhone").val()
   let userName = $("#registerUserName").val()
+  let MPG = $("#registerMPG").val();
+  let make = $("#registerMake").val();
+  let model = $("#registerModel").val();
+  let year = $("#registeryear").val();
+  let license = $("#registerLicense").val()
 
 
-  let count = 0;
-  let looper = 0;
+  setUsername(userName)
 
-  database.ref("accounts").on("value", function (data) {
+  if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
+    document.getElementById("submit-button").disabled = true;
 
-    looper++
+    $(".container").attr("id", "shake-me")
+    $("#change-title").text("Please fill all fields")
+    $("#change-title").css("color", "red")
+    $("#transfer-button").attr("href", "#")
 
-    let value = data.val()
-    // console.log(data.val())
-    let keysArray = Object.keys(value);
-    console.log(keysArray)
-
-
-
-
+    setTimeout(function () {
+      // document.getElementById("sign-in").disabled = false
+      $(".container").attr("id", "")
 
 
+    }, 1000)
+    setTimeout(function () {
+      document.getElementById("submit-button").disabled = false;
+      $("#change-title").css("color", "#1DB954")
+      $("#change-title").text("Sign Up")
+    }, 2000)
+  }
+
+  else {
 
 
+    let count = 0;
+    let looper = 0;
 
-    for (var i = 0; i < 5; i++) {
+    database.ref().on("value", function (data) {
 
-      if (keysArray[i] === userName) {
+      looper++
 
-        // console.log("checked")
-        count = 1
+      let value = data.val()
+      console.log(data.val())
+      let keysArray = Object.keys(value);
+
+      for (var i = 0; i < keysArray.length; i++) {
+
+        if (keysArray[i] === userName) {
+
+          console.log("checked")
+          count = 1
+        }
       }
 
+      if (count === 0) {
+        // console.log("pushing")
+
+        database.ref(userName).push({
+
+          firstName: firstName,
+          lastName: lastName,
+          username: userName,
+          email: email,
+          password: password,
+          address: address,
+          city: city,
+          state: state,
+          phone: phone,
+          driver: "",
+          license: license,
+          carMake: make,
+          carModel: model,
+          MPG: MPG
+
+
+
+
+        })
+
+        window.location.href = "index.html"
+        // console.log($("#transfer-button")[0])
+
+        // console.log("looping")
+      }
+
+      else if (count === 1 && looper === 1) {
+        // document.getElementById("sign-in").disabled = true
+        $(".container").attr("id", "shake-me")
+        $("#change-title").text("Please Choose a Different Username")
+        $("#change-title").css("color", "red")
+        $("#transfer-button").attr("href", "#")
+        $("#registerUserName").val("")
+        setTimeout(function () {
+          // document.getElementById("sign-in").disabled = false
+          $(".container").attr("id", "")
+
+
+          //Reset all text fields to empty
+          $("#registerEmail").val('')
+          $("#registerPassword").val('')
+          $("#registerAddress").val('')
+          $("#registerCity").val('')
+          $("#registerState").val('')
+          $("#registerPhone").val('')
+          $("#registerUserName").val('')
+          $("#registerFirstName").val('')
+          $("#registerLastName").val('')
+          setTimeout(function () {
+            // document.getElementById("sign-in").disabled = false
+            $(".container").attr("id", "")
+
+
+          }, 1000)
+          setTimeout(function () {
+            document.getElementById("submit-button").disabled = false;
+            $("#change-title").css("color", "#1DB954")
+            $("#change-title").text("Sign Up")
+          }, 2000)
+        })
+      }
     }
-    if (count === 0) {
-      // console.log("pushing")
-
-      database.ref("accounts/" + userName).push({
-
-        firstName: firstName,
-        lastName: lastName,
-        username: userName,
-        email: email,
-        password: password,
-        address: address,
-        city: city,
-        state: state,
-        phone: phone
-
-      })
-
-      window.location.href = "index.html"
-      // console.log($("#transfer-button")[0])
-
-      // console.log("looping")
-    }
-
-    else if (count === 1 && looper === 1) {
-      // document.getElementById("sign-in").disabled = true
-      $(".container").attr("id", "shake-me")
-      $("#change-title").text("Please Choose a Different Username")
-      $("#change-title").css("color", "red")
-      $("#transfer-button").attr("href", "#")
-      $("#registerUserName").val("")
-      setTimeout(function () {
-        // document.getElementById("sign-in").disabled = false
-        $(".container").attr("id", "")
-
-
-      }, 1000)
-      setTimeout(function () {
-        $("#change-title").css("color", "#1DB954")
-        $("#change-title").text("Sign Up")
-      }, 2000)
-
-    }
-
-  })
+    )
+  }
 }
+
+
+//main sign in page function
 
 
 let checkSignIn = () => {
@@ -125,9 +176,6 @@ let checkSignIn = () => {
             console.log("loading correctly")
             window.location.href = "landingPage.html"
 
-
-
-
           }
 
         })
@@ -135,10 +183,14 @@ let checkSignIn = () => {
 
     }
     setTimeout(function () {
+      document.getElementById("sign-in").disabled = true;
       $(".container").attr("id", "shake-me")
       $("#change-title-sign-in").text("Incorrect Username Or Password")
       $("#change-title-sign-in").css("color", "red")
       $("#transfer-button").attr("href", "#")
+      $("#userName").val('')
+      $("#user-password").val('')
+
       setTimeout(function () {
         $(".container").attr("id", "")
         // document.getElementById("sign-in").disabled = false
@@ -146,13 +198,13 @@ let checkSignIn = () => {
 
       }, 1000)
       setTimeout(function () {
+        document.getElementById("sign-in").disabled = false;
         $("#change-title-sign-in").css("color", "#1DB954")
         $("#change-title-sign-in").text("Sign Up")
 
 
       }, 2000)
     }, 500)
-
   })
 }
 
@@ -226,9 +278,36 @@ $("#sign-in").on("click", function () {
 
 })
 
+let checkedDriver = () => {
+
+  if (j === 0) {
+    $(".input-hidden").css({ "position": "static", "opacity": "1", "transition": "opacity 1s linear" })
+    j = 1
+  }
+  else if (j === 1) {
+    $(".input-hidden").css({ "position": "absolute", "opacity": "0", "transition": "opacity 0.00001s linear" })
+    j = 0;
+  }
 
 
 
+}
+
+// function initialize() {
+//   var input = document.getElementById('search-text-field');
+//   new google.maps.places.Autocomplete(input);
+// }
+
+
+let setUsername = (username) => {
+  localStorage.setItem("username", username)
+}
+
+let fillUserName = () => {
+  $("#userName").val(localStorage.getItem("username"))
+}
+
+fillUserName()
 
 
 
