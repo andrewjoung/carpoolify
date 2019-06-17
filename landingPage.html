@@ -47,6 +47,14 @@
             <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A
                 RIDE</button>
         </div>
+        <div class="list-group">
+            <h4>POOLS AVAILABLE</h4>
+            <button type="button" class="list-group-item list-group-item-action">[Driver Name] [seats avail.] [est. arrival]</button>
+            <button type="button" class="list-group-item list-group-item-action">Dapibus ac facilisis in</button>
+            <button type="button" class="list-group-item list-group-item-action">Morbi leo risus</button>
+            <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
+            <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros</button>
+        </div>
     </div>
 
     <!-- Modals -->
@@ -108,6 +116,35 @@
         </div>
     </div>
 
+    <div class="modal fade" id="passengerInfoInputModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Set Dropoff Range</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <label for="dropoffRange">Extra distance you're willing to commute to your final destination (miles)</label>
+                <input id="dropoffRange" class="form-control" type="number" step="0.01" min="0" placeholder="" aria-label="Search" required>
+                <!-- <label for="pickupRange">Pickup Range (miles)</label>
+                <input id="pickupRange" class="form-control" type="number" step="0.01" min="0" placeholder="ex: .25" aria-label="Search" required>
+                <label for="availableSeats">Seats Available</label>
+                <input id="availableSeats" class="form-control" type="number" min="1" placeholder="3" aria-label="Search" required> -->
+            </div>
+
+            <div class="modal-footer">
+                <button id="passengerCancelButton" type="button" class="btn" data-dismiss="modal">Cancel</button>
+                <button id="passengerSubmitRide" type="button" class="btn">Find Drivers</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places,geometry"></script>
     </script>
@@ -128,8 +165,6 @@
     <script src="map.js"></script>
     <script src="app.js"></script>
     <script src="logPassenger.js"></script>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&libraries=geometry"></script> -->
-
 
 </body>
 
