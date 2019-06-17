@@ -9,6 +9,10 @@ var departureTime;
 var pickupRange;
 var seatsAvailable;
 
+var dropoffRange;
+
+var waypoints = [];
+
 var directionsService;
 var directionDisplay;
 
@@ -97,16 +101,16 @@ $("#goButton").on("click", function () {
     $("#mapButtons").css("display", "none");
 
     // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
-    var request = {
-        origin: originLat + "," + originLong,
-        destination: destLat + "," + destLong,
-        travelMode: 'DRIVING'
-    };
-    directionsService.route(request, function (response, status) {
-        if (status == 'OK') {
-            directionDisplay.setDirections(response);
-        }
-    });
+    // var request = {
+    //     origin: originLat + "," + originLong,
+    //     destination: destLat + "," + destLong,
+    //     travelMode: 'DRIVING'
+    // };
+    // directionsService.route(request, function (response, status) {
+    //     if (status == 'OK') {
+    //         directionDisplay.setDirections(response);
+    //     }
+    // });
 });
 
 // records whether driver or passenger and prompts for address
