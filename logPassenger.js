@@ -44,17 +44,9 @@ function promptDriverInput() {
 
 // executes when the departure time the user entered is reached
 // code out when user flow is finished
-<<<<<<< HEAD
-function plotAndStartRoute() {
-    // hide waiting for riders
-    // look into waypoint object
-    // lat/long 
-}
-=======
 // function plotAndStartRoute() {
 //     // hide waiting for riders
 // }
->>>>>>> 3410be0b3bc6951fff531b70d9b515c5f76a4a2e
 
 // // handle edge cases
 // $("#driverSubmitRide").on("click", function() {
@@ -85,20 +77,10 @@ function plotAndStartRoute() {
 //         // dbWaypoints: waypoints
 //     });    
     
-<<<<<<< HEAD
-    // get current time
-    // difference between current time and departure time
-    // set timeout to the length of the difference and run function on timeout
-    var currentTime = moment();
-    console.log(moment(currentTime).format("hh:mm"));
-    
-    plotAndStartRoute();
-=======
 //     // get current time
 //     // difference between current time and departure time
 //     // set timeout to the length of the difference and run function on timeout
 //     plotAndStartRoute();
->>>>>>> 3410be0b3bc6951fff531b70d9b515c5f76a4a2e
 
 //     $('#driverInfoInputModal').modal('hide');
 // });
