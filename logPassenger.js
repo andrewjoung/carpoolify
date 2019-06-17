@@ -46,6 +46,8 @@ function promptDriverInput() {
 // code out when user flow is finished
 function plotAndStartRoute() {
     // hide waiting for riders
+    // look into waypoint object
+    // lat/long 
 }
 
 // handle edge cases
@@ -80,6 +82,9 @@ $("#driverSubmitRide").on("click", function() {
     // get current time
     // difference between current time and departure time
     // set timeout to the length of the difference and run function on timeout
+    var currentTime = moment();
+    console.log(moment(currentTime).format("hh:mm"));
+    
     plotAndStartRoute();
 
     $('#driverInfoInputModal').modal('hide');
