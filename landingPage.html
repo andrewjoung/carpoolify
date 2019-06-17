@@ -8,6 +8,9 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
 
+    <!-- Moment JS -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
@@ -56,6 +59,11 @@
             <button type="button" class="list-group-item list-group-item-action">Porta ac consectetur ac</button>
             <button type="button" class="list-group-item list-group-item-action">Vestibulum at eros</button>
         </div>
+
+        <!-- trigger show passenger modal -->
+        <button type="button" id="showPassengersButton" class="btn" data-toggle="modal">
+            Show Passengers
+        </button>
     </div>
 
     <!-- Modals -->
@@ -117,6 +125,29 @@
         </div>
     </div>
 
+<<<<<<< HEAD
+    <!-- Modal for whe driver is waiting for passengers-->
+    <div class="modal fade" id="waitingForPassengerModal" tabindex="-1" role="dialog" aria-labelledby="waitingForPassengers"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Waiting for Passengers</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="waitingForPassengerContent">
+                    need some information about passengers and what not
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+=======
     <div class="modal fade" id="passengerInfoInputModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -147,6 +178,11 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+</div>
+>>>>>>> a97721a2188956af805038a1a82d510c5c93a014
+>>>>>>> 30cb40c86d219ab4c661610d58ecf97aec87ccd5
 
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places,geometry"></script>

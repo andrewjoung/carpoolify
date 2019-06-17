@@ -99,9 +99,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
+
 $("#goButton").on("click", function () {
     $("#mapButtons").css("display", "none");
 
+    // // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
     // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
     // var request = {
     //     origin: originLat + "," + originLong,
@@ -113,7 +115,9 @@ $("#goButton").on("click", function () {
     //         directionDisplay.setDirections(response);
     //     }
     // });
+    
 });
+
 
 // records whether driver or passenger and prompts for address
 $(".btn-lg").on("click", function() {
