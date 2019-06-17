@@ -21,6 +21,8 @@ let checkUserName = () => {
   let phone = $("#registerPhone").val()
   let userName = $("#registerUserName").val()
 
+  setUsername(userName)
+
   if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
     document.getElementById("submit-button").disabled = true;
 
@@ -144,6 +146,8 @@ let checkSignIn = () => {
   let userSignIn = $("#userName").val().trim()
   let userPassword = $("#user-password").val().trim()
 
+
+
   database.ref().on("value", function (data) {
     let keys = Object.keys(data.val());
     for (var i = 0; i < keys.length; i++) {
@@ -243,7 +247,15 @@ let checkedDriver = () => {
 
 // google.maps.event.addDomListener(window, 'load', initialize);
 
+let setUsername = (username) => {
+  localStorage.setItem("username", username)
+}
 
+let fillUserName = () => {
+  $("#userName").val(localStorage.getItem("username"))
+}
+
+fillUserName()
 
 
 
