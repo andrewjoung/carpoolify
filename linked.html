@@ -73,27 +73,60 @@
 
 
       <label for="driverCheckbox">Interested in becoming a Driver?</label>
-      <input type="checkbox" id="driverCheckbox">
+      <input type="checkbox" id="driverCheckbox" onclick="checkedDriver()">
 
+      <!--Hidden group that will show only fi beckbox clicked-->
+      <div class="input-hidden">
+        <div class="form-row">
 
+          <div class="col-md-3">
+            <input type="" id="registerMake" class="form-control mt-3" placeholder="car make"
+              aria-describedby="defaultRegisterFormPasswordHelpBlock">
+          </div>
+          <div class="col-md-3">
+            <input id="registerModel" type="text" class="form-control mt-3" placeholder="car model">
+          </div>
+          <div class="col-md-3">
+            <input id="registeryear" type="text" class="form-control mt-3" placeholder="car year">
+          </div>
 
+          <div class="col-md-3">
+            <input id="registerMPG" type="text" class="form-control mt-3" placeholder="MPG">
+          </div>
 
+          <input type="text" id="registerLicense" class="form-control mt-4" placeholder="license #">
 
-      <!-- Newsletter -->
+        </div>
+      </div>
 
-
-      <!-- Sign up button -->
-      <button id="submit-button" class="btn my-4 btn-block" type="button">Sign Up</button>
-
-      <!-- Social register -->
-      <hr>
-
-      <!-- Terms of service -->
+      <button id="submit-button" type="button" class="mt-4 btn btn-block">Sign Up</button>
       <p>By clicking
         <em>Sign up</em> you agree to our
         <a href="index.html">terms of service</a>
 
     </form>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  <!-- Newsletter -->
+
+
+  <!-- Sign up button -->
+
+
+  <!-- Social register -->
+  <hr>
+
+  <!-- Terms of service -->
+
   </div>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <!-- Bootstrap tooltips -->

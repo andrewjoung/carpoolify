@@ -73,3 +73,8 @@ body{
   font-size:65px;
   margin:0 auto;
 }
+
+.input-hidden{
+ position:absolute;
+ opacity:0;
+}

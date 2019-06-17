@@ -1,29 +1,31 @@
 let database = firebase.database()
 
 
-$("#password-reset-button").on("click", function(e){
-  
+$("#password-reset-button").on("click", function (e) {
+  let counter = 0;
+
   let username = $("#passwordResetUsername").val().trim()
   let phone = $("#passwordResetPhone").val().trim()
   let email = $("#passwordResetEmail").val().trim()
 
 
 
-  if(username === "" || phone === ""){
+  if (username === "" || phone === "") {
     console.log("not valid response")
     shakeMe()
   }
 
-  database.ref(username).on("value", function(data){
+
+  database.ref(username).on("value", function (data) {
     let keys = Object.keys(data.val())
-    if (username === data.val()[keys[0]].username && phone === data.val()[keys[0]].phone && email === data.val()[keys[0]].email){
+    if (username === data.val()[keys[0]].username && phone === data.val()[keys[0]].phone && email === data.val()[keys[0]].email) {
       $("#displayPassword").css("display", "block");
       $("#displayPassword").val(data.val()[keys[0]].password)
 
-     
+
     }
 
-    else{
+    else {
       shakeMe()
     }
   })
@@ -38,7 +40,7 @@ $("#password-reset-button").on("click", function(e){
 
 let shakeMe = () => {
   document.getElementById("password-reset-button").disabled = true
-  
+
   let container = $("#password-container")
   container.attr("id", "shake-me")
   let header = $("#change-header");
@@ -48,14 +50,14 @@ let shakeMe = () => {
   $("#passwordResetPhone").val("")
   $("#passwordResetEmail").val("")
 
-  setTimeout(function(){
+  setTimeout(function () {
     container.attr("id", "password-container")
 
-  },1000)
+  }, 1000)
 
-  setTimeout(function(){
+  setTimeout(function () {
     header.css("color", "#1DB954");
     header.text("Forgot Password")
     document.getElementById("password-reset-button").disabled = false
-  },2000)
+  }, 2000)
 }
