@@ -78,6 +78,17 @@ h1 {
     outline: #1DB954;
 }
 
+#showPassengersButton {
+    /* display:none; */
+    display:none;
+    z-index:3;
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    background-color:#1DB954;
+    color:white;
+}
+
 .list-group {
     display: none;
     width: 400px;
