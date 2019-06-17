@@ -167,7 +167,7 @@ let checkSignIn = () => {
 
           if (userPassword == data.val()[userKeysArray[0]].password) {
             console.log("loading correctly")
-            window.location.href = "signedIn.html"
+            window.location.href = "landingPage.html"
 
           }
 
