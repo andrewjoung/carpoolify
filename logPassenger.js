@@ -10,7 +10,7 @@
 // // Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
 
-// var database = firebase.database();
+//var database = firebase.database();
 
 // firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
@@ -46,28 +46,28 @@ function promptDriverInput() {
 
 // executes when the departure time the user entered is reached
 // code out when user flow is finished
-// function plotAndStartRoute() {
-//     // hide waiting for riders
-// }
+function plotAndStartRoute() {
+    // hide waiting for riders
+}
 
-// // handle edge cases
-// $("#driverSubmitRide").on("click", function() {
-//     // TODO: Ensure that user is inputting correctly formatted data ie '.25' for range instead of '1/4'
+// handle edge cases
+$("#driverSubmitRide").on("click", function() {
+    // TODO: Ensure that user is inputting correctly formatted data ie '.25' for range instead of '1/4'
 
-//     departureTime = $("#departureTime").val();    
-//     // convert miles input my user to meters
-//     pickupRange = parseFloat($("#pickupRange").val()) * 1609.344;
-//     pickupRange = parseInt(pickupRange.toFixed(0));
-//     seatsAvailable = parseInt($("#availableSeats").val());
-//     console.log("depart: " + departureTime + " pickup range: " + pickupRange + " available seats: " + seatsAvailable);
+    departureTime = $("#departureTime").val();    
+    // convert miles input my user to meters
+    pickupRange = parseFloat($("#pickupRange").val()) * 1609.344;
+    pickupRange = parseInt(pickupRange.toFixed(0));
+    seatsAvailable = parseInt($("#availableSeats").val());
+    console.log("depart: " + departureTime + " pickup range: " + pickupRange + " available seats: " + seatsAvailable);
     
     // "passengers" should be the 'role' variable - either 'driver' or 'passenger', so that when they click
     // go after selecting their destination, they're added to the appropriate object list in firebase
     driversRef = database.ref("drivers");
     // testUser here should be replaced with the name of the current logged in user
-    var currentDriver = driversRef.child(testUser);
+    var currentDriver = driversRef.child(localStorage.getItem("username"));
     // change to .push on deploy - .set is just easier for debugging and testing
-    currentDriver.push({
+    currentDriver.set({
         dbOriginLat: originLat,
         dbOriginLong: originLong,
         dbDestLat: destLat,
@@ -79,16 +79,16 @@ function promptDriverInput() {
         // dbWaypoints: waypoints
     });    
     
-//     // get current time
-//     // difference between current time and departure time
-//     // set timeout to the length of the difference and run function on timeout
-//     plotAndStartRoute();
+    // get current time
+    // difference between current time and departure time
+    // set timeout to the length of the difference and run function on timeout
+    plotAndStartRoute();
 
-//     $('#driverInfoInputModal').modal('hide');
-// });
+  $('#driverInfoInputModal').modal('hide');
+});
 
-// //---------------------------------------------------------------
-// // passenger flow
+//---------------------------------------------------------------
+// passenger flow
 
 //
 function passengerFlow() {
@@ -102,9 +102,9 @@ $("#passengerSubmitRide").on("click", function() {
 
     var ref = database.ref("passengers");
     // testUser here should be replaced with the name of the current logged in user
-    var usersRef = ref.child(testUser);
+    var usersRef = ref.child(localStorage.getItem("username"));
     // change to .push on deploy - .set is just easier for debugging and testing
-    usersRef.push({
+    usersRef.set({
         dbOriginLat: originLat,
         dbOriginLong: originLong,
         dbDestLat: destLat,
@@ -124,8 +124,3 @@ $("#passengerSubmitRide").on("click", function() {
         }
     });
 });
-
-
-
-
-
