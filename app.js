@@ -3,6 +3,13 @@ let looper = 0
 
 let database = firebase.database()
 
+let account = "accounts"
+
+
+
+
+
+
 
 
 
@@ -24,39 +31,36 @@ let checkUserName = () => {
   let count = 0;
   let looper = 0;
 
-  database.ref().on("value", function (data) {
+  database.ref("accounts").on("value", function (data) {
 
     looper++
 
     let value = data.val()
     // console.log(data.val())
     let keysArray = Object.keys(value);
+    console.log(keysArray)
 
 
 
 
 
 
-    for (var i = 0; i < keysArray.length; i++) {
+
+
+
+    for (var i = 0; i < 5; i++) {
 
       if (keysArray[i] === userName) {
 
         // console.log("checked")
         count = 1
-
-
       }
 
-
     }
-
     if (count === 0) {
       // console.log("pushing")
 
-
-
-
-      database.ref(userName).push({
+      database.ref("accounts/" + userName).push({
 
         firstName: firstName,
         lastName: lastName,
@@ -82,6 +86,7 @@ let checkUserName = () => {
       $("#change-title").text("Please Choose a Different Username")
       $("#change-title").css("color", "red")
       $("#transfer-button").attr("href", "#")
+      $("#registerUserName").val("")
       setTimeout(function () {
         // document.getElementById("sign-in").disabled = false
         $(".container").attr("id", "")
@@ -104,21 +109,21 @@ let checkSignIn = () => {
   let userSignIn = $("#userName").val().trim()
   let userPassword = $("#user-password").val().trim()
 
-  database.ref().on("value", function (data) {
+  database.ref("accounts").on("value", function (data) {
     let keys = Object.keys(data.val());
     for (var i = 0; i < keys.length; i++) {
       // console.log(keys)
       // console.log(userSignIn)
       if (userSignIn == keys[i]) {
 
-        database.ref(userSignIn).on("value", function (data) {
+        database.ref("accounts/" + userSignIn).on("value", function (data) {
           let userKeysArray = Object.keys(data.val())
           console.log(data.val()[userKeysArray[0]].password)
           console.log(userPassword)
 
           if (userPassword == data.val()[userKeysArray[0]].password) {
             console.log("loading correctly")
-            window.location.href = "signedIn.html"
+            window.location.href = "landingPage.html"
 
 
 
@@ -153,6 +158,47 @@ let checkSignIn = () => {
 
 
 
+$(".btn-lg").on("click", function () {
+  var id = $(this).attr("id");
+  if (id === "startRide") {
+    role = "driver";
+  } else if (id === "findRide") {
+    role = "passenger";
+  }
+  console.log(role);
+});
+
+$("#startRide").on("click", function () {
+  // "passengers" should be the 'role' variable - either 'driver' or 'passenger', so that when they click
+  // go after selecting their destination, they're added to the appropriate object list in firebase
+
+  // testUser here should be replaced with the name of the current logged in user
+  var usersRef = ref.child(testUser);
+  usersRef.set({
+    dbOriginLat: originLat,
+    dbOriginLong: originLong,
+    dbDestLat: destLat,
+    dbDestLong: destLong
+  });
+  if (role === "driver") {
+    console.log("enter driver flow");
+  } else if (role === "passenger") {
+    console.log("enter passenger flow");
+  }
+});
+
+//
+function driver() {
+
+}
+
+//
+function passenger() {
+
+}
+
+
+
 
 
 
@@ -180,12 +226,7 @@ $("#sign-in").on("click", function () {
 
 })
 
-// function initialize() {
-//   var input = document.getElementById('search-text-field');
-//   new google.maps.places.Autocomplete(input);
-// }
 
-// google.maps.event.addDomListener(window, 'load', initialize);
 
 
 

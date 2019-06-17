@@ -44,7 +44,8 @@
         <div id="mapButtons">
             <button id="startRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">START A
                 RIDE</button>
-            <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A RIDE</button>
+            <button id="findRide" class="btn-lg" data-toggle="modal" data-target="#destinationAddressModal">FIND A
+                RIDE</button>
         </div>
     </div>
 
@@ -81,8 +82,22 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&callback=initMap&libraries=places,geometry"></script>
     </script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
+            authDomain: "rideshare-fe506.firebaseapp.com",
+            databaseURL: "https://rideshare-fe506.firebaseio.com",
+            projectId: "rideshare-fe506",
+            storageBucket: "rideshare-fe506.appspot.com",
+            messagingSenderId: "611609382463",
+            appId: "1:611609382463:web:6b761d7c73c33300"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <script src="map.js"></script>
-    <script src="logPassenger.js"></script>
+    <script src="app.js"></script>
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoXt6pSwA0glAnd484xWcSZiRDqXGczSM&libraries=geometry"></script> -->
 
 
