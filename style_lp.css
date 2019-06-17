@@ -77,3 +77,21 @@ h1 {
 #destinationSearch:focus {
     outline: #1DB954;
 }
+
+.list-group {
+    display: none;
+    width: 400px;
+    margin: 0 auto;
+    /* box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+h4 {
+    color: white;
+    z-index: 10001;
+    text-align: center;
+    background-color: slategray;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    margin-top: 150px;
+}

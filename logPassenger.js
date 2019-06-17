@@ -100,11 +100,11 @@ $("#passengerSubmitRide").on("click", function() {
     dropoffRange = parseInt(dropoffRange.toFixed(0));
     console.log(dropoffRange);
 
-    var ref = database.ref(role + "s");
+    var ref = database.ref("passengers");
     // testUser here should be replaced with the name of the current logged in user
     var usersRef = ref.child(testUser);
     // change to .push on deploy - .set is just easier for debugging and testing
-    usersRef.set({
+    usersRef.push({
         dbOriginLat: originLat,
         dbOriginLong: originLong,
         dbDestLat: destLat,
@@ -112,15 +112,17 @@ $("#passengerSubmitRide").on("click", function() {
         dbDropoffRange: dropoffRange
         // waypoints updated and pushed to firebase as riders join ride
         // dbWaypoints: waypoints
-    // });
-    // database.ref("/drivers").on("value", function(snapshot) {
-    //     var snapObject = Object.keys(snapshot.val());
-    //     console.log(snapObject);
-    //     for (var i = 0; i < snapObject.length; i++) {
-    //         driverDestLat = snapshot.val()[snapObject[i]];
-    //         console.log(driverDestLat);
-    //     }
-    // });
+    });
+    database.ref("/drivers").on("value", function(snapshot) {
+        var snapObject = Object.keys(snapshot.val());
+        console.log(snapObject);
+        for (var i = 0; i < snapObject.length; i++) {
+            console.log(snapObject[i]);
+            let wow =  Object.keys( snapshot.val()[snapObject[i]])
+            let test = snapshot.val()[snapObject[i]][wow[0]].dbDestLat;
+            console.log(test);
+        }
+    });
 });
 
 
