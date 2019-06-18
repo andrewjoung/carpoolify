@@ -199,7 +199,7 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
 }
 
 //
-function displayDriver(name, seats) {
+function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);

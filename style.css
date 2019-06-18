@@ -78,3 +78,8 @@ body{
  position:absolute;
  opacity:0;
 }
+
+#second-input-hidden{
+  position:absolute;
+  opacity:0
+}
