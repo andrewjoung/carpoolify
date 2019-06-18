@@ -30,9 +30,6 @@ $.ajax({
 
     let make = $("#registerMake").val();
     let year = $("#registeryear").val();
-
-
-
     $.ajax({
       url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=" + year + "&make=" + make,
       method: "GET"
@@ -56,54 +53,12 @@ $.ajax({
         $("#make-select").append(option)
       }
 
-      $.ajax({
-        url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year="+year+"&make="+make+"&model=Intrepid",
-        method: "GET"
-      }).then(function (response) {
-        // console.log(response)
-        let resString = new XMLSerializer().serializeToString(response);
-
-        var result = parser.validate(resString);
-        // if (result !== true) console.log(result.err); 
-        var jsonObj = parser.parse(resString);
-
-        // console.log(jsonObj.menuItems.menuItem[0].value)
-        let t = (jsonObj.menuItems.menuItem[0].value)
-        console.log(jsonObj)
 
 
 
-
-        // ajax call to get car MPG via car ID, which is declared as T -------------------
-
-        $.ajax({
-          url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + t,
-          method: "GET"
-        }).then(function (response) {
-          let resString = new XMLSerializer().serializeToString(response);
-
-          var result = parser.validate(resString);
-          // if (result !== true) console.log(result.err); 
-          var jsonObj = parser.parse(resString);
-          let MPG = (jsonObj.yourMpgVehicle.avgMpg)
-
-          pricePerMile = gas / MPG
-          console.log(pricePerMile)
-
-          let userName = $("#registerUserName").val().trim()
-
-          console.log(returnMPG(pricePerMile))
-
-
-
-
-
-
-        })
-      })
     })
-  })
 
+  })
 })
 
 // database.ref("/accounts").set({
@@ -114,6 +69,10 @@ $.ajax({
 
 // Checks Username upon registering. Will return either true or false
 let checkUserName = () => {
+
+  let make = $("#registerMake").val()
+  let model = $("#make-select").val();
+  let year = $("#registeryear").val();
   let driver;
   let firstName = $("#registerFirstName").val()
   let lastName = $("#registerLastName").val()
@@ -125,11 +84,55 @@ let checkUserName = () => {
   let phone = $("#registerPhone").val()
   let userName = $("#registerUserName").val()
   let license = $("#registerLicense").val()
+  $.ajax({
+    url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=" + year + "&make=" + make + "&model=" + model,
+    method: "GET"
+  }).then(function (response) {
+    // console.log(response)
+    let resString = new XMLSerializer().serializeToString(response);
 
-  let MPG = returnMPG(pricePerMile)
-  let make = $("#registerMake").val()
-  let model = $("#make-select").val();
-  let year = $("#registeryear").val();
+    var result = parser.validate(resString);
+    // if (result !== true) console.log(result.err); 
+    var jsonObj = parser.parse(resString);
+
+    // console.log(jsonObj.menuItems.menuItem[0].value)
+    let t = (jsonObj.menuItems.menuItem[0].value)
+    console.log(jsonObj)
+
+
+
+
+    // ajax call to get car MPG via car ID, which is declared as T -------------------
+
+    $.ajax({
+      url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + t,
+      method: "GET"
+    }).then(function (response) {
+      let resString = new XMLSerializer().serializeToString(response);
+
+      var result = parser.validate(resString);
+      // if (result !== true) console.log(result.err); 
+      var jsonObj = parser.parse(resString);
+      let MPG = (jsonObj.yourMpgVehicle.avgMpg)
+
+      pricePerMile = gas / MPG
+      // console.log(pricePerMile)
+
+      // let userName = $("#registerUserName").val().trim()
+
+      // console.log(returnMPG(pricePerMile))
+
+
+
+
+
+
+    })
+  })
+
+
+  // let MPG = returnMPG(pricePerMile)
+
   if ($('input[name="checkbox"]').is(":checked")) {
     driver = true;
 
@@ -142,6 +145,10 @@ let checkUserName = () => {
 
 
   setUsername(userName)
+
+
+
+
 
   if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
     document.getElementById("submit-button").disabled = true;
@@ -204,7 +211,7 @@ let checkUserName = () => {
           license: license,
           carMake: make,
           carModel: model,
-          MPG: MPG,
+          // MPG: MPG,
           year: year,
           driver: driver
 
