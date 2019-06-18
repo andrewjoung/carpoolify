@@ -88,50 +88,50 @@ $("#driverSubmitRide").on("click", function() {
     
     // "passengers" should be the 'role' variable - either 'driver' or 'passenger', so that when they click
     // go after selecting their destination, they're added to the appropriate object list in firebase
-    driversRef = database.ref("drivers");
-    // testUser here should be replaced with the name of the current logged in user
-    var currentDriver = driversRef.child(testUser);
-    // change to .push on deploy - .set is just easier for debugging and testing
-    currentDriver.push({
-        dbOriginLat: originLat,
-        dbOriginLong: originLong,
-        dbDestLat: destLat,
-        dbDestLong: destLong,
-        dbPickupRange: pickupRange,
-        dbDepartTime: departureTime,
-        dbSeatsAvail: seatsAvailable
-        // waypoints updated and pushed to firebase as riders join ride
-        // dbWaypoints: waypoints
-    });    
+    // driversRef = database.ref("drivers");
+    // // testUser here should be replaced with the name of the current logged in user
+    // var currentDriver = driversRef.child(testUser);
+    // // change to .push on deploy - .set is just easier for debugging and testing
+    // currentDriver.push({
+    //     dbOriginLat: originLat,
+    //     dbOriginLong: originLong,
+    //     dbDestLat: destLat,
+    //     dbDestLong: destLong,
+    //     dbPickupRange: pickupRange,
+    //     dbDepartTime: departureTime,
+    //     dbSeatsAvail: seatsAvailable
+    //     // waypoints updated and pushed to firebase as riders join ride
+    //     // dbWaypoints: waypoints
+    // });    
     
-    //TODO 
-    // get current time
-    // difference between current time and departure time
-    // set timeout to the length of the difference and run function on timeout
+    // //TODO 
+    // // get current time
+    // // difference between current time and departure time
+    // // set timeout to the length of the difference and run function on timeout
 
-    //to test whenever the driver database is changed 
-    database.ref("drivers/Tyrion").on("value", function(snapshot){
+    // //to test whenever the driver database is changed 
+    // database.ref("drivers/Tyrion").on("value", function(snapshot){
 
-        var currentTime = moment();
-        var driverSet = snapshot.val();
-        var departureTime = driverSet.dbDepartTime;
+    //     var currentTime = moment();
+    //     var driverSet = snapshot.val();
+    //     var departureTime = driverSet.dbDepartTime;
 
-        console.log("departure time: " + departureTime);
-        console.log("current time: " + moment(currentTime).format("hh:mm"));
-        console.log(typeof(departureTime));
+    //     console.log("departure time: " + departureTime);
+    //     console.log("current time: " + moment(currentTime).format("hh:mm"));
+    //     console.log(typeof(departureTime));
 
-        var departureTimeConverted = moment(departureTime, "hh:mm").subtract();
+    //     var departureTimeConverted = moment(departureTime, "hh:mm").subtract();
 
-        console.log(departureTimeConverted);
+    //     console.log(departureTimeConverted);
 
-        //difference between time in milliseconds
-        var timeWindow = moment(departureTimeConverted).diff(moment(), "milliseconds");
+    //     //difference between time in milliseconds
+    //     var timeWindow = moment(departureTimeConverted).diff(moment(), "milliseconds");
 
-        var plotAndStartRouteTimeout = setTimeout(plotAndStartRoute, timeWindow);
+    //     var plotAndStartRouteTimeout = setTimeout(plotAndStartRoute, timeWindow);
 
-        console.log(timeWindow);
+    //     console.log(timeWindow);
 
-    });
+    // });
 
     //TODO
     //show modal showing information about driver car information

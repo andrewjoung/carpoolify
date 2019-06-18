@@ -273,6 +273,7 @@ fillUserName()
 
 
 $("#driverSubmitRide").on("click", function(){
+  
   console.log("working")
   let username = localStorage.getItem("username")
   let time = $("#departureTime").val().trim();
@@ -284,7 +285,8 @@ $("#driverSubmitRide").on("click", function(){
     range:range,
     seats:seats
   })
-})
+  
+});
 
 
 
