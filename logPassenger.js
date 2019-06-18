@@ -1,18 +1,5 @@
-// var firebaseConfig = {
-//     apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
-//     authDomain: "carpoolify.firebaseapp.com",
-//     databaseURL: "https://carpoolify.firebaseio.com",
-//     projectId: "carpoolify",
-//     storageBucket: "",
-//     messagingSenderId: "144701142261",
-//     appId: "1:144701142261:web:8eb8f2f55b5181ac"
-// };
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
 
-//var database = firebase.database();
-
-// firgure out how to make this the name of the current user from the user authentication
+//firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
 var driversRef;
 
