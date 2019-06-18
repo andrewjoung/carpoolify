@@ -17,6 +17,7 @@ var waypoints = [];
 
 var directionsService;
 var directionDisplay;
+var distanceService;
 
 var distance;
 var pos;
@@ -44,6 +45,8 @@ function initMap() {
         map: map,
         polylineOptions: { strokeColor: "#191414" }
     });
+
+    distanceService = new google.maps.DistanceMatrixService();
 
     // TODO: Account for the fact that unless the user actually clicks one of the autocomplete suggestions, nothing is passed to this to get the dest. lat/long
     function initializeAutocomplete() {
