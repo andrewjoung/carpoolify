@@ -80,22 +80,44 @@ h1 {
 
 .list-group {
     display: none;
-    width: 400px;
+    max-width: 500px;
+    min-width: 350px;
     margin: 0 auto;
     /* box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 h4 {
-    color: white;
-    z-index: 10001;
+    color: #1DB954;
+    /* z-index: 10001; */
     text-align: center;
     background-color: slategray;
     padding-bottom: 10px;
     padding-top: 10px;
     margin-bottom: 0px;
-    margin-top: 150px;
+    /* margin-top: 150px; */
 }
 
-.driver {
+/* .driver {
     color: black;
+    position: relative;
+} */
+
+.driverName {
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.seatsLeft {
+
+}
+
+.estArrival {
+    color: #1DB954;
+    position: absolute;
+    right: 20px;
+
+}
+
+.badge-primary {
+    background-color: #1DB954 !important;
 }

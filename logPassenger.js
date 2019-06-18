@@ -180,7 +180,7 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         var dropoffDistance = destinationResponse.rows[0].elements[0].distance.value;
                         if (dropoffDistance <= dropoffRange) {
                             console.log(driverName + " is a driver candidate");
-                            displayDriver(driverName, seatsLeft);
+                            displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong);
                         }
                     }
                 });
@@ -189,14 +189,48 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
     });
 }
 
+//
 function displayDriver(name, seats) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);
+
     var driverName = $("<span>").text(name);
-    var domSeatsLeft = $("<span>").text("Seats Left: " + seats);
-    var estArrival = $("<span>").text("est. arrival time");
-    newDriver.append(driverName, domSeatsLeft, estArrival);
+    driverName.addClass("driverName");
+
+    var domSeatsLeft = $("<span>").text(" Open Seats:  ");
+    domSeatsLeft.addClass("seatsLeft");
+
+    var seatsBadge = $("<span>").addClass("badge badge-primary badge-pill");
+    seatsBadge.text(seats);
+    //domSeatsLeft.css("text-align", "center");
+    var arrivalTime;
+    var driverOrigin = new google.maps.LatLng(driverOLat, driverOLong);
+    var driverDestination = new google.maps.LatLng(driverDLat, driverDLong);
+    distanceService.getDistanceMatrix({
+        origins: [driverOrigin],
+        destinations: [driverDestination],
+        travelMode: "DRIVING"
+    },
+    function (response, status) {
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+            console.log('Error:', destinationStatus);
+        } else {
+            var dropoffDistance = response.rows[0].elements[0].distance.value;
+            if (dropoffDistance <= dropoffRange) {
+                console.log(driverName + " is a driver candidate");
+                displayDriver(driverName, seatsLeft);
+            }
+        }
+    });
+
+    var estArrival = $("<span>").text("12:34pm");
+    estArrival.addClass("estArrival");
+    //estArrival.css("text-align", "right");
+
+
+
+    newDriver.append(driverName, domSeatsLeft, seatsBadge, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
 }
