@@ -29,6 +29,7 @@ for (driver of drivers) {
         dbDestLat: driver.destLat,
         dbDestLong: driver.destLong,
         dbSeatsAvail: driver.availableSeats,
-        dbPickupRange: 402
+        dbPickupRange: 402,
+        dbDepartTime: "17:00" 
     });
 }
