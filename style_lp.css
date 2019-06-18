@@ -1,12 +1,9 @@
-/* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
 #map {
     height: 100%;
     width: 100%;
     position: absolute;
 }
 
-/* Optional: Makes the sample page fill the window. */
 html,
 body {
     height: 100%;
@@ -65,11 +62,11 @@ h1 {
     z-index: 10000 !important;
 }
 
-#goButton, #driverSubmitRide, #passengerSubmitRide {
+#goButton, #driverSubmitRide, #passengerSubmitRide, #driverConfirmButton {
     background-color: #1DB954;
 }
 
-#cancelButton, #driverCancelButton, #passengerCancelButton {
+#cancelButton, #driverCancelButton, #passengerCancelButton, #driverConfirmCancelButton {
     background-color: black;
     color: white;
 }

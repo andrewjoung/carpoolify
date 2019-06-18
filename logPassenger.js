@@ -218,15 +218,16 @@ $("#passengerSubmitRide").on("click", function () {
             driverDestLong = snapObject[driver].dbDestLong;
             driverPickupRange = snapObject[driver].dbPickupRange;
             driverSeatsLeft = snapObject[driver].dbSeatsAvail;
+            driverDepartureTime = snapObject[driver].dbDepartTime;
 
-            matchRiders(originLat, originLong, destLat, destLong, driverOriginLat, driverOriginLong, driverDestLat, driverDestLong, driverPickupRange, dropoffRange, driverSeatsLeft, driver);
+            matchRiders(originLat, originLong, destLat, destLong, driverOriginLat, driverOriginLong, driverDestLat, driverDestLong, driverPickupRange, dropoffRange, driverSeatsLeft, driverDepartureTime, driver);
         }
         clickCount++;
     });
 });
 
 // must make sure passed in range and caluclated distance are the same unit of measurement
-function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, driverOLong, driverDLat, driverDLong, pickupRange, dropoffRange, seatsLeft, driverName) {
+function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, driverOLong, driverDLat, driverDLong, pickupRange, dropoffRange, seatsLeft, depart, driverName) {
     var passOLatLng = new google.maps.LatLng(passOLat, passOLong);
     var driverOLatLng = new google.maps.LatLng(driverOLat, driverOLong);    
     distanceService.getDistanceMatrix({
@@ -257,7 +258,7 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         console.log(clickCount);
                         if (dropoffDistance <= dropoffRange && clickCount === 1) {
                             console.log(driverName + " is a driver candidate");
-                            displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong);
+                            displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong, depart);
                         }
                     }
                 });
@@ -266,8 +267,8 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
     });
 }
 
-//
-function displayDriver(name, seats) {
+// Displays the information of potential drivers to the passenger screen
+function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong, depart) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);
@@ -279,11 +280,17 @@ function displayDriver(name, seats) {
     domSeatsLeft.addClass("seatsLeft");
 
     var seatsBadge = $("<span>").addClass("badge badge-primary badge-pill");
+    seatsBadge.attr("id", driver + "SeatsLeft");
     seatsBadge.text(seats);
-    //domSeatsLeft.css("text-align", "center");
-    //var arrivalTime;
+
+    var estArrival = $("<span>");
+    estArrival.addClass("estArrival");
+
+    var estArrivalTime;
+
     var driverOrigin = new google.maps.LatLng(driverOLat, driverOLong);
     var driverDestination = new google.maps.LatLng(driverDLat, driverDLong);
+
     distanceService.getDistanceMatrix({
         origins: [driverOrigin],
         destinations: [driverDestination],
@@ -293,28 +300,29 @@ function displayDriver(name, seats) {
         if (status !== google.maps.DistanceMatrixStatus.OK) {
             console.log('Error:', destinationStatus);
         } else {
-            console.log(response);
+            var travelTime = response.rows[0].elements[0].duration.value;
+            var departureTime = moment(depart, "HH:mm");
+            estArrivalTime = departureTime.add(travelTime, "seconds");
+            estArrival.text(estArrivalTime.format("hh:mm a"));
         }
     });
-
-    var estArrival = $("<span>").text("12:34pm");
-    estArrival.addClass("estArrival");
-    //estArrival.css("text-align", "right");
-
-
 
     newDriver.append(driverName, domSeatsLeft, seatsBadge, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
 }
-//these set of buttons will only appear for the user flow
 
+//these set of buttons will only appear for the user flow
 $(document).on("click", ".driver", function(event) {
     
     event.preventDefault();
 
-    
     var driverClicked = $(this).attr("id"); //the driver the rider wishes to ride with
+
+    var driverNameConfirm = $("#driverNameConfirm");
+    driverNameConfirm.text(driverClicked);
+    $('#confirmDriverModal').modal('show');
+    
     var rider= localStorage.getItem("username"); //the rider 
     
     //save the rider information to the driver database 
