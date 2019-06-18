@@ -204,7 +204,7 @@ function displayDriver(name, seats) {
     var seatsBadge = $("<span>").addClass("badge badge-primary badge-pill");
     seatsBadge.text(seats);
     //domSeatsLeft.css("text-align", "center");
-    var arrivalTime;
+    //var arrivalTime;
     var driverOrigin = new google.maps.LatLng(driverOLat, driverOLong);
     var driverDestination = new google.maps.LatLng(driverDLat, driverDLong);
     distanceService.getDistanceMatrix({
@@ -216,11 +216,7 @@ function displayDriver(name, seats) {
         if (status !== google.maps.DistanceMatrixStatus.OK) {
             console.log('Error:', destinationStatus);
         } else {
-            var dropoffDistance = response.rows[0].elements[0].distance.value;
-            if (dropoffDistance <= dropoffRange) {
-                console.log(driverName + " is a driver candidate");
-                displayDriver(driverName, seatsLeft);
-            }
+            console.log(response);
         }
     });
 
