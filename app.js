@@ -37,6 +37,8 @@ let checkUserName = () => {
     driver = false
   }
 
+
+
   setUsername(userName)
 
   if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
@@ -97,12 +99,20 @@ let checkUserName = () => {
           city: city,
           state: state,
           phone: phone,
+<<<<<<< HEAD
           license: license,
           carMake: make,
           carModel:model,
           MPG: MPG,
           year:year,
           driver:driver
+=======
+          driver: "",
+          license: license,
+          carMake: make,
+          carModel: model,
+          MPG: MPG
+>>>>>>> sw_login
 
 
 
