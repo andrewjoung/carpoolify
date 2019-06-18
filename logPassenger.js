@@ -48,6 +48,73 @@ function promptDriverInput() {
 // code out when user flow is finished
 function plotAndStartRoute() {
     // hide waiting for riders
+    console.log("entering plot and start");
+
+    var userDriver = localStorage.getItem("username");
+    //console.log("this is stupid: " + userDriver);
+
+    //we'll have to change this to be "drivers/ + userDriver"
+    database.ref("drivers/Jon").on("value", function(snapshot) {
+
+        console.log("entering database");
+        //riders have chosen to carpool and db has been populated with a waypoint child element
+        console.log(snapshot);
+        console.log(snapshot.child("dbWaypoints").exists());
+
+        if(snapshot.child("dbWaypoints").exists()) {
+
+            console.log("riders have joined and we're doing waypoint stuff");
+            var dbWaypoints = snapshot.val()["dbWaypoints"];
+            var dbWaypointKeys = Object.keys(dbWaypoints); //array of keys 
+
+            var waypointsToAdd = [];
+
+            console.log(dbWaypointKeys);
+
+            var firstKey = dbWaypointKeys[0];
+            var secondKey = dbWaypointKeys[1];
+
+            console.log(snapshot.val()['dbWaypoints'][firstKey]);
+            console.log(snapshot.val()["dbWaypoints"][secondKey]);
+
+            for(var i = 0; i < dbWaypointKeys.length; i++) {
+                var key = dbWaypointKeys[i];
+                //array with length of 2 that holds lat/lng for each key
+                var coordinateArray = snapshot.val()["dbWaypoints"][key];
+                var lat = coordinateArray[0];
+                var lng = coordinateArray[1];
+
+                var latLng = new google.maps.LatLng(lat, lng);
+
+                waypointsToAdd.push({location: latLng});
+            }
+
+            var request = {
+                origin: originLat + "," + originLong,
+                destination: destLat + "," + destLong,
+                waypoints: waypointsToAdd,
+                travelMode: 'DRIVING'
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == 'OK') {
+                    directionDisplay.setDirections(response);
+                }
+            });
+        } else {
+            //just plot the route
+            var soloRequest = {
+                origin: originLat + "," + originLong,
+                destination: destLat + "," + destLong,
+                travelMode: 'DRIVING'
+            };
+            directionsService.route(soloRequest, function (response, status) {
+                if (status == 'OK') {
+                    directionDisplay.setDirections(response);
+                }
+            });
+        }
+
+    });
 }
 
 // handle edge cases
@@ -79,10 +146,11 @@ $("#driverSubmitRide").on("click", function () {
         // dbWaypoints: waypoints
     });
 
-    // get current time
-    // difference between current time and departure time
-    // set timeout to the length of the difference and run function on timeout
-    plotAndStartRoute();
+    var departTime = moment(departureTime, "HH:mm");
+
+    var timeframe = departTime.diff(moment(), "milliseconds");
+
+    var routeTimeout = setTimeout(plotAndStartRoute, timeframe);
 
     $('#driverInfoInputModal').modal('hide');
 });
