@@ -115,6 +115,8 @@ $("#passengerSubmitRide").on("click", function () {
     // testUser here should be replaced with the name of the current logged in user
     var usersRef = ref.child(localStorage.getItem("username"));
     // change to .push on deploy - .set is just easier for debugging and testing
+    console.log(usersRef);
+
     usersRef.set({
         dbOriginLat: originLat,
         dbOriginLong: originLong,
@@ -124,6 +126,7 @@ $("#passengerSubmitRide").on("click", function () {
         // waypoints updated and pushed to firebase as riders join ride
         // dbWaypoints: waypoints
     });
+
     database.ref("/drivers").on("value", function (snapshot) {
         var snapObject = snapshot.val();
         var counter = 1;
@@ -145,12 +148,12 @@ $("#passengerSubmitRide").on("click", function () {
                 origins: [passOriginLatLng],
                 destinations: [driverOriginLatLng],
                 travelMode: "DRIVING"
-            },
-            function (response, status) {
+            }, function (response, status) {
                 if (status !== google.maps.DistanceMatrixStatus.OK) {
                     console.log('Error:', status);
                 } else {
                     var pickupDistance = response.rows[0].elements[0].distance.value;
+                    console.log(response);
                     if (pickupDistance <= driverPickupRange) {
                         console.log("Passenger is within pickup range of " + driver);
 
@@ -178,6 +181,7 @@ $("#passengerSubmitRide").on("click", function () {
                     }
                 }
             });
+            
 
 
 
@@ -200,7 +204,7 @@ $("#passengerSubmitRide").on("click", function () {
     // counter++;
 
     //console.log(snapObject[driver].dbDestLat);
-}
+        }
     });
 });
 
