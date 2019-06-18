@@ -1,0 +1,37 @@
+.container{
+  margin-top:10vh;
+  background:white;
+  color:#1DB954;
+  
+}
+
+#header-tag{
+ 
+  color:black;
+  background:#1DB954;
+  text-align: center;
+}
+
+.card{
+  padding:15px;
+}
+
+.form-header{
+  color:black;
+  background:#1DB954;
+}
+
+#header-center{
+  text-align: center;
+  padding:10px 0px 10px 0px;
+}
+
+.md-form{
+  display:flex;
+  
+}
+
+.button-addon2{
+  align-self:center;
+}
+
