@@ -103,6 +103,7 @@ var driverPickupRange;
 var driverSeatsLeft;
 var driverName;
 
+var clickCount = 0;
 //var driverPool = [];
 
 var availableDrivers = $("#availableDrivers");
@@ -133,7 +134,10 @@ $("#passengerSubmitRide").on("click", function () {
         // dbWaypoints: waypoints
     });
 
+    //clickCount = 0;
+
     database.ref("/drivers").on("value", function (snapshot) {
+
         var snapObject = snapshot.val();
         // var counter = 1;
         for (driver in snapObject) {
@@ -147,76 +151,9 @@ $("#passengerSubmitRide").on("click", function () {
             driverPickupRange = snapObject[driver].dbPickupRange;
             driverSeatsLeft = snapObject[driver].dbSeatsAvail;
 
-<<<<<<< HEAD
-            var passOriginLatLng = new google.maps.LatLng(originLat, originLong);
-            var driverOriginLatLng = new google.maps.LatLng(driverOriginLat, driverOriginLong);
-
-            var inRange = false;
-
-            distanceService.getDistanceMatrix({
-                origins: [passOriginLatLng],
-                destinations: [driverOriginLatLng],
-                travelMode: "DRIVING"
-            }, function (response, status) {
-                if (status !== google.maps.DistanceMatrixStatus.OK) {
-                    console.log('Error:', status);
-                } else {
-                    var pickupDistance = response.rows[0].elements[0].distance.value;
-                    console.log(response);
-                    if (pickupDistance <= driverPickupRange) {
-                        console.log("Passenger is within pickup range of " + driver);
-
-                        var passDestLatLng = new google.maps.LatLng(destLat, destLong);
-                        var driverDestLatLng = new google.maps.LatLng(driverDestLat, driverDestLong);
-
-                        distanceService.getDistanceMatrix({
-                            origins: [passDestLatLng],
-                            destinations: [driverDestLatLng],
-                            travelMode: "DRIVING"
-                        },
-                        function (response, status) {
-                            if (status !== google.maps.DistanceMatrixStatus.OK) {
-                                console.log('Error:', status);
-                            } else {
-                                var dropoffDistance = response.rows[0].elements[0].distance.value;
-                                console.log(dropoffDistance);
-                                if (dropoffDistance <= dropoffRange) {
-                                    console.log(driver + "'s destination is within passenger's specified dropoff range");
-                                    inRange = true;
-                                    console.log(inRange);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-            
-
-
-
-    // var inPickupRange = matchRiders(originLat, originLong, driverOriginLat, driverOriginLong, driverPickupRange);
-    // //console.log(inPickupRange);
-    // var inDropoffRange = matchRiders(destLat, destLong, driverDestLat, driverDestLong, dropoffRange);
-    // //console.log(inDropoffRange);
-    // if (inPickupRange && inDropoffRange && driverSeatsLeft > 0) {
-    //     //add driver to rider queue
-    //     // driverPool.push(driver);
-    //     // TODO: DOM manipulation
-    //     var newDriver = $("<button>").addClass("list-group-item list-group-item-action");
-    //     newDriver.attr("id", "driver" + counter);
-    //     var driverName = $("<span>").text(driver);
-    //     var domSeatsLeft = $("<span>").text("Seats Left: " + driverSeatsLeft);
-    //     var estArrival = $("<span>").text("est. arrival time");
-    //     newDriver.append({ driverName, domSeatsLeft, estArrival });
-    //     availableDrivers.append(newDriver);
-    // }
-    // counter++;
-
-    //console.log(snapObject[driver].dbDestLat);
-=======
             matchRiders(originLat, originLong, destLat, destLong, driverOriginLat, driverOriginLong, driverDestLat, driverDestLong, driverPickupRange, dropoffRange, driverSeatsLeft, driver);
->>>>>>> 1879e8d568375ac83ef3289cab7e33d6794c2545
         }
+        clickCount++;
     });
 });
 
@@ -249,7 +186,8 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         console.log('Error:', destinationStatus);
                     } else {
                         var dropoffDistance = destinationResponse.rows[0].elements[0].distance.value;
-                        if (dropoffDistance <= dropoffRange) {
+                        console.log(clickCount);
+                        if (dropoffDistance <= dropoffRange && clickCount === 1) {
                             console.log(driverName + " is a driver candidate");
                             displayDriver(driverName, seatsLeft);
                         }
@@ -264,10 +202,35 @@ function displayDriver(name, seats) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);
-    var driverName = $("<span>").text(name);
+    var driverName = $("<span>").text(name + " ");
     var domSeatsLeft = $("<span>").text("Seats Left: " + seats);
     var estArrival = $("<span>").text("est. arrival time");
     newDriver.append(driverName, domSeatsLeft, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
 }
+//these set of buttons will only appear for the user flow
+
+$(document).on("click", ".driver", function(event) {
+    
+    event.preventDefault();
+
+    
+    var driverClicked = $(this).attr("id"); //the driver the rider wishes to ride with
+    var rider= localStorage.getItem("username"); //the rider 
+    
+    //save the rider information to the driver database 
+    var driverDbRef = database.ref("drivers/" + driverClicked);
+    driverDbRef.child("/ridingPassengers").push(rider);
+
+    //passengers pickup lat/long
+    console.log("testing lat: " + originLat);
+    console.log("testing long: " + originLong);
+
+    var riderDbLatLngArray = [];
+    riderDbLatLngArray.push(originLat);
+    riderDbLatLngArray.push(originLong);
+
+    database.ref("drivers/" + driverClicked + "/dbWaypoints").push(riderDbLatLngArray);
+    
+});
