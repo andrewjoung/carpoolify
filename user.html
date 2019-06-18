@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+  <link rel="stylesheet" href="user.css">
+  <title>User profile</title>
+</head>
+
+<body>
+  <header id="header-tag">
+    <h1 id="header-label">carpoolify</h1>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <div class="card-block">
+
+        <!--Header-->
+        <div class="form-header">
+          <h3 id="header-center"><i class="fa fa-user"></i> User Settings</h3>
+        </div>
+
+        <!--Body-->
+
+        <div class="md-form">
+          <i class="fa fa-user prefix"></i>
+          <input disabled type="text" id="form1" class="form-control" aria-describedby="button-addon2">
+          <label for="form4"></label>
+          <div class="input-group-append">
+            <button id="username-button"
+              class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect button-addon2"
+              type="button">Change</button>
+          </div>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-user prefix"></i>
+          <input disabled type="text" id="form2" class="form-control" aria-describedby="button-addon2">
+          <label for="form2"></label>
+          <div class="input-group-append">
+            <button id="name-button"
+              class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect button-addon2"
+              type="button">Change</button>
+          </div>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-envelope prefix"></i>
+          <input disabled type="text" id="form3" class="form-control" aria-describedby="button-addon2">
+          <label for="form3"></label>
+          <div class="input-group-append">
+            <button id="email-button"
+              class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect button-addon2"
+              type="button">Change</button>
+          </div>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-address-card prefix"></i>
+          <input disabled type="text" id="form4" class="form-control" aria-describedby="button-addon2">
+          <label for="form4"></label>
+          <div class="input-group-append">
+            <button id="address-button"
+              class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect button-addon2"
+              type="button">Change</button>
+          </div>
+        </div>
+
+        <div class="md-form">
+          <i class="fa fa-lock prefix"></i>
+          <input disabled type="password" id="form5" class="form-control" aria-describedby="button-addon2">
+          <label for="form5"></label>
+          <div class="input-group-append">
+            <button id="password-button"
+              class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect button-addon2"
+              type="button">Change</button>
+          </div>
+        </div>
+
+
+
+
+
+
+        <fieldset class="form-group">
+          <input type="checkbox" id="checkbox1">
+          <label for="checkbox1">Driver Info</label>
+        </fieldset>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+
+
+
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+          https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+               https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
+    authDomain: "rideshare-fe506.firebaseapp.com",
+    databaseURL: "https://rideshare-fe506.firebaseio.com",
+    projectId: "rideshare-fe506",
+    storageBucket: "rideshare-fe506.appspot.com",
+    messagingSenderId: "611609382463",
+    appId: "1:611609382463:web:6b761d7c73c33300"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="user.js"></script>
+
+</html>

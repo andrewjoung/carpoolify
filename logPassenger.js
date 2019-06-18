@@ -203,12 +203,6 @@ function displayDriver(name, seats) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);
-<<<<<<< HEAD
-    var driverName = $("<span>").text(name + " ");
-    var domSeatsLeft = $("<span>").text("Seats Left: " + seats);
-    var estArrival = $("<span>").text("est. arrival time");
-    newDriver.append(driverName, domSeatsLeft, estArrival);
-=======
 
     var driverName = $("<span>").text(name);
     driverName.addClass("driverName");
@@ -242,7 +236,6 @@ function displayDriver(name, seats) {
 
 
     newDriver.append(driverName, domSeatsLeft, seatsBadge, estArrival);
->>>>>>> dp_matchDrivers
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
 }
