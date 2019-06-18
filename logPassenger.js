@@ -260,8 +260,13 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
     });
 }
 
+<<<<<<< HEAD
+//
+function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong) {
+=======
 // Displays the information of potential drivers to the passenger screen
 function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong, depart) {
+>>>>>>> 0582ea15bf927bfd983753f89c12f570bd750e84
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);

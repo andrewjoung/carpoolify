@@ -4,61 +4,86 @@
 // console.log(string);
 
 
-let getGas = (gas) => {
-  console.log(gas)
-  return gas
-}
+
+
+// let databse = firebase.database();
 
 
 //ajax call to get gas -----------------------------------------------------------
 
-$.ajax({
-  url: "https://www.fueleconomy.gov/ws/rest/fuelprices",
-  method: "GET"
-}).then(function (response) {
-  // console.log(response)
-  let resString = new XMLSerializer().serializeToString(response);
-  //  console.log(resString);
-  var result = parser.validate(resString);
-  // if (result !== true) console.log(result.err); 
-  var jsonObj = parser.parse(resString);
-  let gas = (jsonObj.fuelPrices.midgrade)
+// $.ajax({
+//   url: "https://www.fueleconomy.gov/ws/rest/fuelprices",
+//   method: "GET"
+// }).then(function (response) {
+//   // console.log(response)
+//   let resString = new XMLSerializer().serializeToString(response);
+//   //  console.log(resString);
+//   var result = parser.validate(resString);
+//   // if (result !== true) console.log(result.err); 
+//   var jsonObj = parser.parse(resString);
+//   let gas = (jsonObj.fuelPrices.midgrade)
 
-// ajax call to get car id via make model and year ------------------------------
+//   // ajax call to get car id via make model and year ------------------------------
 
-  $.ajax({
-    url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=1997&make=Dodge&model=Intrepid",
-    method: "GET"
-  }).then(function (response) {
-    // console.log(response)
-    let resString = new XMLSerializer().serializeToString(response);
+//   $.ajax({
+//     url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=1997&make=Dodge&model=Intrepid",
+//     method: "GET"
+//   }).then(function (response) {
+//     // console.log(response)
+//     let resString = new XMLSerializer().serializeToString(response);
 
-    var result = parser.validate(resString);
-    // if (result !== true) console.log(result.err); 
-    var jsonObj = parser.parse(resString);
+//     var result = parser.validate(resString);
+//     // if (result !== true) console.log(result.err); 
+//     var jsonObj = parser.parse(resString);
 
-    // console.log(jsonObj.menuItems.menuItem[0].value)
-    let t = (jsonObj.menuItems.menuItem[0].value)
+//     // console.log(jsonObj.menuItems.menuItem[0].value)
+//     let t = (jsonObj.menuItems.menuItem[0].value)
+//     console.log(jsonObj)
 
-   // ajax call to get car MPG via car ID, which is declared as T -------------------
+//     // ajax call to get car MPG via car ID, which is declared as T -------------------
 
-    $.ajax({
-      url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + t,
-      method: "GET"
-    }).then(function (response) {
-      let resString = new XMLSerializer().serializeToString(response);
+//     $.ajax({
+//       url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + t,
+//       method: "GET"
+//     }).then(function (response) {
+//       let resString = new XMLSerializer().serializeToString(response);
 
-      var result = parser.validate(resString);
-      // if (result !== true) console.log(result.err); 
-      var jsonObj = parser.parse(resString);
-      let MPG = (jsonObj.yourMpgVehicle.avgMpg)
+//       var result = parser.validate(resString);
+//       // if (result !== true) console.log(result.err); 
+//       var jsonObj = parser.parse(resString);
+//       let MPG = (jsonObj.yourMpgVehicle.avgMpg)
 
-      let pricePerMile = gas / MPG
-      console.log(pricePerMile)
+//       let pricePerMile = gas / MPG
+//       console.log(pricePerMile)
 
-    })
-  })
-})
+//     })
+//   })
+// })
+
+
+
+
+
+
+
+
+// })
+
+
+
+
+
+
+
+
+
+  // ajax call to get car id via make model and year ------------------------------
+
+
+
+
+
+
 
 
 
