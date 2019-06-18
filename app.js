@@ -1,10 +1,13 @@
 
 let looper = 0
 let j = 0;
+let username;
 
 let database = firebase.database()
 
-
+// database.ref("/accounts").set({
+//   name: 12
+// });
 
 
 
@@ -262,7 +265,7 @@ let checkedDriver = () => {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 let setUsername = (username) => {
-  localStorage.setItem("username", username)
+  localStorage.setItem("username", username);
 }
 
 let fillUserName = () => {
@@ -272,21 +275,19 @@ let fillUserName = () => {
 fillUserName()
 
 
-$("#driverSubmitRide").on("click", function(){
-  
-  console.log("working")
-  let username = localStorage.getItem("username")
-  let time = $("#departureTime").val().trim();
-  let range = $("#pickupRange").val().trim();
-  let seats = $("#availableSeats").val().trim();
+// $("#driverSubmitRide").on("click", function(){
+//   console.log("working")
+//   username = localStorage.getItem("username")
+//   let time = $("#departureTime").val().trim();
+//   let range = $("#pickupRange").val().trim();
+//   let seats = $("#availableSeats").val().trim();
 
-  database.ref("drivers").child(username).set({
-    time:time,
-    range:range,
-    seats:seats
-  })
-  
-});
+//   database.ref("drivers").child(username).set({
+//     time:time,
+//     range:range,
+//     seats:seats
+//   })
+// })
 
 
 
