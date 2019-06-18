@@ -1,3 +1,9 @@
+//TODO:
+//
+
+
+
+
 
 //firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
@@ -301,6 +307,9 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
 
 //these set of buttons will only appear for the user flow
 //when rider clicks a driver
+//TODO:
+//have confirmation modal appear when this is clicked
+//shift what is in here to after the confirmation modal is clicked 
 $(document).on("click", ".driver", function(event) {
     
     event.preventDefault();
