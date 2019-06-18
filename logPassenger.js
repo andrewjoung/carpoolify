@@ -103,6 +103,7 @@ var driverPickupRange;
 var driverSeatsLeft;
 var driverName;
 
+var clickCount = 0;
 //var driverPool = [];
 
 var availableDrivers = $("#availableDrivers");
@@ -121,6 +122,8 @@ $("#passengerSubmitRide").on("click", function () {
     // testUser here should be replaced with the name of the current logged in user
     var usersRef = ref.child(localStorage.getItem("username"));
     // change to .push on deploy - .set is just easier for debugging and testing
+    console.log(usersRef);
+
     usersRef.set({
         dbOriginLat: originLat,
         dbOriginLong: originLong,
@@ -130,7 +133,11 @@ $("#passengerSubmitRide").on("click", function () {
         // waypoints updated and pushed to firebase as riders join ride
         // dbWaypoints: waypoints
     });
+
+    //clickCount = 0;
+
     database.ref("/drivers").on("value", function (snapshot) {
+
         var snapObject = snapshot.val();
         // var counter = 1;
         for (driver in snapObject) {
@@ -146,6 +153,7 @@ $("#passengerSubmitRide").on("click", function () {
 
             matchRiders(originLat, originLong, destLat, destLong, driverOriginLat, driverOriginLong, driverDestLat, driverDestLong, driverPickupRange, dropoffRange, driverSeatsLeft, driver);
         }
+        clickCount++;
     });
 });
 
@@ -178,7 +186,8 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         console.log('Error:', destinationStatus);
                     } else {
                         var dropoffDistance = destinationResponse.rows[0].elements[0].distance.value;
-                        if (dropoffDistance <= dropoffRange) {
+                        console.log(clickCount);
+                        if (dropoffDistance <= dropoffRange && clickCount === 1) {
                             console.log(driverName + " is a driver candidate");
                             displayDriver(driverName, seatsLeft);
                         }
@@ -193,10 +202,35 @@ function displayDriver(name, seats) {
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);
-    var driverName = $("<span>").text(name);
+    var driverName = $("<span>").text(name + " ");
     var domSeatsLeft = $("<span>").text("Seats Left: " + seats);
     var estArrival = $("<span>").text("est. arrival time");
     newDriver.append(driverName, domSeatsLeft, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
 }
+//these set of buttons will only appear for the user flow
+
+$(document).on("click", ".driver", function(event) {
+    
+    event.preventDefault();
+
+    
+    var driverClicked = $(this).attr("id"); //the driver the rider wishes to ride with
+    var rider= localStorage.getItem("username"); //the rider 
+    
+    //save the rider information to the driver database 
+    var driverDbRef = database.ref("drivers/" + driverClicked);
+    driverDbRef.child("/ridingPassengers").push(rider);
+
+    //passengers pickup lat/long
+    console.log("testing lat: " + originLat);
+    console.log("testing long: " + originLong);
+
+    var riderDbLatLngArray = [];
+    riderDbLatLngArray.push(originLat);
+    riderDbLatLngArray.push(originLong);
+
+    database.ref("drivers/" + driverClicked + "/dbWaypoints").push(riderDbLatLngArray);
+    
+});
