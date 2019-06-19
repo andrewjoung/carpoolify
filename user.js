@@ -12,7 +12,6 @@ let username = fillUserName()
 
 
 
-
 database.ref("accounts").child(username).on("value", function (data) {
   if (t === 0) {
 
@@ -63,7 +62,7 @@ $("#user-change-btn").on("click", function () {
     year: $("#form10").val(),
 
   })
-  location.reload()
+  window.location.href= "landingPage.html"
 
 })
 
