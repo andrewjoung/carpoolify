@@ -147,6 +147,23 @@ $("#driverSubmitRide").on("click", function () {
     $("#showPassengersButton").css('display', "block");
 });
 
+//display riders on the drivers side when a rider joins a ride
+database.ref("drivers/Jon").on("value", function(snapshot) {
+
+    //if riders have joined the ride
+    if(snapshot.child("ridingPassengers").exists()) {
+        //populate the driver modal with the passengers
+        var passengerModal = $("#waitingForPassengerContent");
+        var dbRiders = snapshot.val()["ridingPassengers"];
+        for(var i = 0; i < dbRiders.length; i++) {
+            var ridingPassengerDiv = $("<div>");
+            console.log(dbRiders[i]);
+            ridingPassengerDiv.text(dbRiders[i]);
+            passengerModal.append(ridingPassengerDiv);
+        }
+    }
+});
+
 //---------------------------------------------------------------
 // passenger flow
 
