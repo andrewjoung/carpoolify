@@ -14,7 +14,7 @@ let gasAjax = () => {
 
 
 }
-document.getElementById("driverCheckbox").checked = false;
+// document.getElementById("driverCheckbox").checked = false;
 
 let carAjax = (year, make, model, gas) => {
 

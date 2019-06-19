@@ -35,3 +35,14 @@
   align-self:center;
 }
 
+#user-icon{
+  color:blue;
+}
+#gas-icon{
+  color:blue;
+}
+
+.container{
+  margin-bottom:2vh;
+}
+
