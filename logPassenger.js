@@ -210,9 +210,9 @@ $("#passengerSubmitRide").on("click", function () {
         // var counter = 1;
         for (driver in snapObject) {
             //driverName = driver;
-            console.log(driver);
+           // console.log(driver);
             driverOriginLat = snapObject[driver].dbOriginLat;
-            console.log(driverOriginLat);
+            //console.log(driverOriginLat);
             driverOriginLong = snapObject[driver].dbOriginLong;
             driverDestLat = snapObject[driver].dbDestLat;
             driverDestLong = snapObject[driver].dbDestLong;
@@ -241,7 +241,7 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
         } else {
             var pickupDistance = originResponse.rows[0].elements[0].distance.value;
             if (pickupDistance <= pickupRange && seatsLeft > 0) {
-                console.log("Passenger is in pickup range of " + driverName);
+                //console.log("Passenger is in pickup range of " + driverName);
                 var passDLatLng = new google.maps.LatLng(passDLat, passDLong);
                 var driverDLatLng = new google.maps.LatLng(driverDLat, driverDLong);
                 distanceService.getDistanceMatrix({
@@ -257,7 +257,7 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         var dropoffDistance = destinationResponse.rows[0].elements[0].distance.value;
                         console.log(clickCount);
                         if (dropoffDistance <= dropoffRange && clickCount === 1) {
-                            console.log(driverName + " is a driver candidate");
+                            //console.log(driverName + " is a driver candidate");
                             displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong, depart);
                         }
                     }
@@ -280,7 +280,7 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
     domSeatsLeft.addClass("seatsLeft");
 
     var seatsBadge = $("<span>").addClass("badge badge-primary badge-pill");
-    seatsBadge.attr("id", driver + "SeatsLeft");
+    seatsBadge.attr("id", name + "SeatsLeft");
     seatsBadge.text(seats);
 
     var estArrival = $("<span>");
@@ -312,31 +312,62 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
     availableDrivers.css("display", "block");
 }
 
+var driverClicked;
+
 //these set of buttons will only appear for the user flow
 $(document).on("click", ".driver", function(event) {
-    
+    // this prevent default may not be necessary
     event.preventDefault();
-
-    var driverClicked = $(this).attr("id"); //the driver the rider wishes to ride with
-
+    driverClicked = $(this).attr("id"); //the driver the rider wishes to ride with
     var driverNameConfirm = $("#driverNameConfirm");
     driverNameConfirm.text(driverClicked);
     $('#confirmDriverModal').modal('show');
-    
+});
+
+$("#driverConfirmButton").on("click", function() {
+    var driverConfirmClick = 0;
+    $('#confirmDriverModal').modal('hide');
+    $("#availableDrivers").css("display", "none");
+
     var rider= localStorage.getItem("username"); //the rider 
     
     //save the rider information to the driver database 
     var driverDbRef = database.ref("drivers/" + driverClicked);
     driverDbRef.child("/ridingPassengers").push(rider);
-
+    
     //passengers pickup lat/long
-    console.log("testing lat: " + originLat);
-    console.log("testing long: " + originLong);
-
+    //console.log("testing lat: " + originLat);
+    //console.log("testing long: " + originLong);
+    
     var riderDbLatLngArray = [];
     riderDbLatLngArray.push(originLat);
     riderDbLatLngArray.push(originLong);
-
-    database.ref("drivers/" + driverClicked + "/dbWaypoints").push(riderDbLatLngArray);
     
+    database.ref("drivers/" + driverClicked + "/dbWaypoints").push(riderDbLatLngArray);
+
+    database.ref("drivers/" + driverClicked + "/dbSeatsAvail").on("value", function(snapshot) {
+        if (driverConfirmClick === 0) {
+            driverConfirmClick++;
+            // console.log("Current seats in " + driverClicked + "'s car: " + snapshot.val());
+            var updatedSeats = snapshot.val();
+            updatedSeats--;
+            if (updatedSeats > 0) {
+                updateSeatCount(updatedSeats);
+                database.ref("drivers/" + driverClicked + "/").update({
+                    dbSeatsAvail: updatedSeats
+                });
+            } else if (updatedSeats === 0) {
+                removeDriver();
+            }
+        }
+    });
 });
+
+function updateSeatCount(newSeatCount) {
+    $("#" + driverClicked + "SeatsLeft").text(newSeatCount);
+}
+
+function removeDriver() {
+    $("#" + driverClicked).remove();
+}
+    
