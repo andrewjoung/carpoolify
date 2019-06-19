@@ -111,9 +111,9 @@ let checkUserName = () => {
     gas = (jsonObj.fuelPrices.midgrade)
 
     if(year === "" || make === ""){
-      year = 1985;
-      make = "ford";
-      model = "Laser"
+      year = 2000;
+      make = "Subaru";
+      model = "Forester AWD"
     }
 
 
