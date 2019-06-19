@@ -16,7 +16,7 @@ $("#password-reset-button").on("click", function (e) {
   }
 
 
-  database.ref(username).on("value", function (data) {
+  database.ref("accounts").child(username).on("value", function (data) {
     let keys = Object.keys(data.val())
     if (username === data.val()[keys[0]].username && phone === data.val()[keys[0]].phone && email === data.val()[keys[0]].email) {
       $("#displayPassword").css("display", "block");

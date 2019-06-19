@@ -1,12 +1,9 @@
-/* Always set the map height explicitly to define the size of the div
-* element that contains the map. */
 #map {
     height: 100%;
     width: 100%;
     position: absolute;
 }
 
-/* Optional: Makes the sample page fill the window. */
 html,
 body {
     height: 100%;
@@ -25,11 +22,11 @@ body {
     z-index: 2;
     top: 40%;
     left: 50%;
-    margin-left: -175px;
+    margin-left: -190px;
 }
 
 .btn-lg {
-    margin: 10px;
+    margin: 8px;
     font-weight: bold;
     color: white;
     border: solid 1pt;
@@ -38,7 +35,7 @@ body {
 }
 
 #startRide {
-    background-color: #1DB954;
+    background-color: black;
 }
 
 #startRide:active {
@@ -46,7 +43,7 @@ body {
 }
 
 #findRide {
-    background-color: #16C7B8;
+    background-color: #1DB954;
 }
 
 #findRide:active {
@@ -58,22 +55,109 @@ h1 {
     background-color: #1DB954;
     padding-bottom: 8px;
     margin-bottom: 0;
-    border-bottom: solid 2pt white;
+    border-bottom: solid 1px white;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
 }
 
 .pac-container {
     z-index: 10000 !important;
 }
 
-#goButton, #driverSubmitRide {
+#goButton, #driverSubmitRide, #passengerSubmitRide, #driverConfirmButton, #ridingPassengersClose {
     background-color: #1DB954;
 }
 
-#cancelButton, #driverCancelButton {
+#cancelButton, #driverCancelButton, #passengerCancelButton, #driverConfirmCancelButton {
     background-color: black;
     color: white;
 }
 
 #destinationSearch:focus {
     outline: #1DB954;
+}
+
+#showPassengersButton {
+    /* display:none; */
+    display:none;
+    z-index:3;
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    background-color:#1DB954;
+    color:white;
+}
+
+.list-group {
+    display: none;
+    max-width: 500px;
+    min-width: 350px;
+    margin: 0 auto;
+    /* box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+}
+
+h4 {
+    color: #1DB954;
+    /* z-index: 10001; */
+    text-align: center;
+    background-color: slategray;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    /* margin-top: 150px; */
+}
+
+/* .driver {
+    color: black;
+    position: relative;
+} */
+
+.driverName {
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.seatsLeft {
+
+}
+
+.estArrival {
+    color: #1DB954;
+    position: absolute;
+    right: 20px;
+
+}
+
+.badge-primary {
+    background-color: #1DB954 !important;
+}
+
+.riderNameSpan {
+    color: #1DB954;
+    font-weight: 300;
+}
+
+#ridingPassengerModalFooter {
+    padding: 0.5rem;
+}
+
+#startRide, #findRide {
+    font-family: 'Montserrat', sans-serif;
+    border:none;
+    border-radius: 4px;
+}
+
+#userIcon {
+    position: absolute;
+    right: 50px;
+    color:white;
+}
+
+#userIcon i:hover {
+    color: black;
+}
+
+a {
+    color:white;
 }

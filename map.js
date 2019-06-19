@@ -5,17 +5,29 @@ var originLong;
 var destLat;
 var destLong;
 
+var currentName;
+
 var departureTime;
 var pickupRange;
 var seatsAvailable;
 
+var dropoffRange;
+
+var waypoints = [];
+
 var directionsService;
 var directionDisplay;
+var distanceService;
 
 var distance;
 var pos;
 
 var role;
+
+
+// let database = firebase.database();
+
+// database.ref()
 
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -38,6 +50,8 @@ function initMap() {
         map: map,
         polylineOptions: { strokeColor: "#191414" }
     });
+
+    distanceService = new google.maps.DistanceMatrixService();
 
     // TODO: Account for the fact that unless the user actually clicks one of the autocomplete suggestions, nothing is passed to this to get the dest. lat/long
     function initializeAutocomplete() {
@@ -93,21 +107,25 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
 }
 
+
 $("#goButton").on("click", function () {
     $("#mapButtons").css("display", "none");
 
+    // // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
     // this directions flow is going to likely have to be refactored into a generalized function as we'll have to call it quite a bit
-    var request = {
-        origin: originLat + "," + originLong,
-        destination: destLat + "," + destLong,
-        travelMode: 'DRIVING'
-    };
-    directionsService.route(request, function (response, status) {
-        if (status == 'OK') {
-            directionDisplay.setDirections(response);
-        }
-    });
+    // var request = {
+    //     origin: originLat + "," + originLong,
+    //     destination: destLat + "," + destLong,
+    //     travelMode: 'DRIVING'
+    // };
+    // directionsService.route(request, function (response, status) {
+    //     if (status == 'OK') {
+    //         directionDisplay.setDirections(response);
+    //     }
+    // });
+    
 });
+
 
 // records whether driver or passenger and prompts for address
 $(".btn-lg").on("click", function() {

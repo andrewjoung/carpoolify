@@ -22,18 +22,15 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
-  <link rel="stylesheet" href="forgotP.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <header id="header-tag">
-    <h1 id="header-label">carpoolify</h1>
-  </header>
 
   <div id="password-container" class="container">
 
     <!-- Default form login -->
-    <form class="text-center p-5">
+    <form class="text-center p-5" id="passwordForm">
 
       <p id= "change-header" class="h4 mb-4">Forgot Password</p>
 
@@ -74,16 +71,16 @@
 <script>
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyCjLLosE9Zs0oZvrHosEd2_q75KVWxjokA",
-    authDomain: "rideshare-fe506.firebaseapp.com",
-    databaseURL: "https://rideshare-fe506.firebaseio.com",
-    projectId: "rideshare-fe506",
-    storageBucket: "rideshare-fe506.appspot.com",
-    messagingSenderId: "611609382463",
-    appId: "1:611609382463:web:6b761d7c73c33300"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
+    authDomain: "carpoolify.firebaseapp.com",
+    databaseURL: "https://carpoolify.firebaseio.com",
+    projectId: "carpoolify",
+    storageBucket: "",
+    messagingSenderId: "144701142261",
+    appId: "1:144701142261:web:8eb8f2f55b5181ac"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 </script>
 <script src="forgotP.js"></script>
 
