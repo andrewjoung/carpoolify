@@ -179,8 +179,8 @@ var availableDrivers = $("#availableDrivers");
 $("#passengerSubmitRide").on("click", function () {
 
     // temporarily set lat/long to my home address
-    originLat = 47.668403;
-    originLong = -122.313996;
+    originLat = 47.630507;
+    originLong = -122.154106;
 
     dropoffRange = parseFloat($("#dropoffRange").val()) * 1609.344;
     dropoffRange = parseInt(dropoffRange.toFixed(0));
