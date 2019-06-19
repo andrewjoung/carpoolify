@@ -158,7 +158,7 @@ let checkUserName = () => {
 
         // console.log(returnMPG(pricePerMile))
 
-        setUsername(userName)
+        setUsername(firstName);
 
 
 
@@ -402,11 +402,13 @@ let checkedDriver = () => {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 let setUsername = (username) => {
-  localStorage.setItem("username", username);
+  sessionStorage.setItem("username", username);
+  // localStorage.setItem("username", username);
 }
 
 let fillUserName = () => {
-  $("#userName").val(localStorage.getItem("username"))
+  $("#userName").val(sessionStorage.getItem("username"))
+  // $("#userName").val(localStorage.getItem("username"))
 }
 
 fillUserName()

@@ -13,8 +13,8 @@
 //var database = firebase.database();
 
 // firgure out how to make this the name of the current user from the user authentication
-var testUser = "Tyrion";
-var driversRef;
+//var testUser = "Tyrion";
+//var driversRef;
 
 $("#goButton").on("click", function () {
     if (role === "driver") {
@@ -33,8 +33,7 @@ $("#goButton").on("click", function () {
 // driver flow
 
 //
-function driverFlow() {
-    // TODO: prevent this 
+function driverFlow() { 
     $("#driverSubmitRide").attr("data-dismiss", "modal");
     promptDriverInput();
 }
@@ -54,7 +53,7 @@ function plotAndStartRoute() {
     //console.log("this is stupid: " + userDriver);
 
     //we'll have to change this to be "drivers/ + userDriver"
-    database.ref("drivers/Jon").on("value", function(snapshot) {
+    database.ref("drivers/" + userDriver).on("value", function(snapshot) {
 
         console.log("entering database");
         //riders have chosen to carpool and db has been populated with a waypoint child element
@@ -179,8 +178,8 @@ var availableDrivers = $("#availableDrivers");
 $("#passengerSubmitRide").on("click", function () {
 
     // temporarily set lat/long to my home address
-    originLat = 47.668403;
-    originLong = -122.313996;
+    originLat = 47.630507;
+    originLong = -122.154106;
 
     dropoffRange = parseFloat($("#dropoffRange").val()) * 1609.344;
     dropoffRange = parseInt(dropoffRange.toFixed(0));
@@ -259,6 +258,8 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         if (dropoffDistance <= dropoffRange && clickCount === 1) {
                             //console.log(driverName + " is a driver candidate");
                             displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong, depart);
+                        } else {
+                            alert("No drivers available at this time - please try again in a few minutes");
                         }
                     }
                 });
