@@ -258,8 +258,6 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
                         if (dropoffDistance <= dropoffRange && clickCount === 1) {
                             //console.log(driverName + " is a driver candidate");
                             displayDriver(driverName, seatsLeft, driverOLat, driverOLong, driverDLat, driverDLong, depart);
-                        } else {
-                            alert("No drivers available at this time - please try again in a few minutes");
                         }
                     }
                 });
@@ -311,6 +309,14 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
     newDriver.append(driverName, domSeatsLeft, seatsBadge, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
+
+    var domTimeoutTime = moment(depart, "HH:mm");
+    var driverTimeFrame = domTimeoutTime.diff(moment(), "milliseconds");
+    console.log("driverTimeFrame for testing: " + driverTimeFrame);
+
+    setTimeout(function () {
+        $("#" + name).remove();
+    }, driverTimeFrame);
 }
 
 var driverClicked;
@@ -358,7 +364,7 @@ $("#driverConfirmButton").on("click", function() {
                     dbSeatsAvail: updatedSeats
                 });
             } else if (updatedSeats === 0) {
-                removeDriver();
+                removeDriver(driverClicked);
             }
         }
     });
@@ -368,7 +374,7 @@ function updateSeatCount(newSeatCount) {
     $("#" + driverClicked + "SeatsLeft").text(newSeatCount);
 }
 
-function removeDriver() {
-    $("#" + driverClicked).remove();
+function removeDriver(name) {
+    $("#" + name).remove();
 }
     
