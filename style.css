@@ -90,7 +90,7 @@ a{
   opacity:0
 }
 
-#change-title-sign-in {
+#change-title-sign-in, #change-title {
   font-weight: 300;
   text-shadow: 2px 3px 10px black;
   font-family: 'Montserrat', sans-serif;

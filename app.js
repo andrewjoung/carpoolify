@@ -211,7 +211,7 @@ let checkUserName = () => {
           license: license,
           carMake: make,
           carModel:model,
-          MPG: MPG,
+          MPG: pricePerMile,
           year:year,
           driver:driver
 
