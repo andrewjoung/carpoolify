@@ -1,18 +1,9 @@
-// var firebaseConfig = {
-//     apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
-//     authDomain: "carpoolify.firebaseapp.com",
-//     databaseURL: "https://carpoolify.firebaseio.com",
-//     projectId: "carpoolify",
-//     storageBucket: "",
-//     messagingSenderId: "144701142261",
-//     appId: "1:144701142261:web:8eb8f2f55b5181ac"
-// };
-// // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
+//TODO:
+//notify driver when passenger joings ride
+//display passenger in some sort of collapsable modals
+//notify passenger when driver departs (timeout)
 
-//var database = firebase.database();
-
-// firgure out how to make this the name of the current user from the user authentication
+//firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
 var driversRef;
 
@@ -54,7 +45,7 @@ function plotAndStartRoute() {
     //console.log("this is stupid: " + userDriver);
 
     //we'll have to change this to be "drivers/ + userDriver"
-    database.ref("drivers/Jon").on("value", function(snapshot) {
+    database.ref("drivers/" + userDriver).on("value", function(snapshot) {
 
         console.log("entering database");
         //riders have chosen to carpool and db has been populated with a waypoint child element
@@ -153,8 +144,52 @@ $("#driverSubmitRide").on("click", function () {
     var routeTimeout = setTimeout(plotAndStartRoute, timeframe);
 
     $('#driverInfoInputModal').modal('hide');
+    $("#showPassengersButton").css('display', "block");
 });
 
+var userDriver = localStorage.getItem("username");
+//display riders on the drivers side when a rider joins a ride
+
+var riderClickCounter = 0;
+
+database.ref("drivers/" + userDriver).on("value", function(snapshot) {
+
+    riderClickCounter++;
+
+    console.log("tlkjafl;sdjfldjs");
+
+    //if riders have joined the ride
+    if(snapshot.child("ridingPassengers").exists() && riderClickCounter % 3 === 0) {
+        //populate the driver modal with the passengers
+        var passengerModal = $("#waitingForPassengerContent");
+
+        var dbRiders = snapshot.val()["ridingPassengers"];
+        var dbRidersKeys = Object.keys(dbRiders);
+
+        for(var i = 0; i < dbRidersKeys.length; i++) {
+            console.log("for loop thing");
+            var ridingPassengerDiv = $("<div>");
+            var key = dbRidersKeys[i];
+            var riderName = snapshot.val()["ridingPassengers"][key];
+            console.log(riderName);
+            ridingPassengerDiv.html("<span class='riderNameSpan'>" + riderName + "</span> is riding with you");
+            passengerModal.append(ridingPassengerDiv);
+
+            alert(riderName + " has joined your ride!");
+        }
+
+        
+    }
+});
+
+$("#showPassengersButton").on("click", function(event){
+
+    event.preventDefault();
+
+    console.log("entering show passenger button callback");
+
+    $("#waitingForPassengerModal").modal("show");
+});
 //---------------------------------------------------------------
 // passenger flow
 
@@ -315,6 +350,10 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
 var driverClicked;
 
 //these set of buttons will only appear for the user flow
+//when rider clicks a driver
+//TODO:
+//have confirmation modal appear when this is clicked
+//shift what is in here to after the confirmation modal is clicked 
 $(document).on("click", ".driver", function(event) {
     // this prevent default may not be necessary
     event.preventDefault();

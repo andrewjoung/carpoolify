@@ -63,7 +63,7 @@ h1 {
     z-index: 10000 !important;
 }
 
-#goButton, #driverSubmitRide, #passengerSubmitRide, #driverConfirmButton {
+#goButton, #driverSubmitRide, #passengerSubmitRide, #driverConfirmButton, #ridingPassengersClose {
     background-color: #1DB954;
 }
 
@@ -129,4 +129,13 @@ h4 {
 
 .badge-primary {
     background-color: #1DB954 !important;
+}
+
+.riderNameSpan {
+    color: #1DB954;
+    font-weight: 300;
+}
+
+#ridingPassengerModalFooter {
+    padding: 0.5rem;
 }

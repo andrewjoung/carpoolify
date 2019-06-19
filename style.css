@@ -82,6 +82,7 @@ body{
 #second-input-hidden{
   position:absolute;
   opacity:0
+<<<<<<< HEAD
 }
 
 
@@ -89,4 +90,6 @@ body{
   color:#1DB954;
   background:black;
   border:4px solid #1DB954;
+=======
+>>>>>>> aj_driver_departure
 }
