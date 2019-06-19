@@ -83,3 +83,10 @@ body{
   position:absolute;
   opacity:0
 }
+
+
+#redirect-button{
+  color:#1DB954;
+  background:black;
+  border:4px solid #1DB954;
+}

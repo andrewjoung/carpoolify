@@ -19,6 +19,9 @@ let carAjax = (year, make, model, gas) => {
 
 }
 
+$("#redirect-button").on("click", function(){
+  window.location.href = "index.html"
+})
 
 
 
