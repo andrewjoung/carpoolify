@@ -1,9 +1,7 @@
 //TODO:
-//
-
-
-
-
+//notify driver when passenger joings ride
+//display passenger in some sort of collapsable modals
+//notify passenger when driver departs (timeout)
 
 //firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
@@ -146,6 +144,7 @@ $("#driverSubmitRide").on("click", function () {
     var routeTimeout = setTimeout(plotAndStartRoute, timeframe);
 
     $('#driverInfoInputModal').modal('hide');
+    $("#showPassengersButton").css('display', "block");
 });
 
 //---------------------------------------------------------------
@@ -260,13 +259,8 @@ function matchRiders(passOLat, passOLong, passDLat, passDLong, driverOLat, drive
     });
 }
 
-<<<<<<< HEAD
-//
-function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong) {
-=======
 // Displays the information of potential drivers to the passenger screen
 function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverDLong, depart) {
->>>>>>> 0582ea15bf927bfd983753f89c12f570bd750e84
     $('#passengerInfoInputModal').modal('hide');
     var newDriver = $("<button>").addClass("list-group-item list-group-item-action driver");
     newDriver.attr("id", name);

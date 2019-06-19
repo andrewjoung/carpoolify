@@ -210,17 +210,10 @@ let checkUserName = () => {
           phone: phone,
           license: license,
           carMake: make,
-<<<<<<< HEAD
-          carModel: model,
-          // MPG: MPG,
-          year: year,
-          driver: driver
-=======
           carModel:model,
           MPG: MPG,
           year:year,
           driver:driver
->>>>>>> 0582ea15bf927bfd983753f89c12f570bd750e84
 
 
 
