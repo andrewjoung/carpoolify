@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-//TODO:
-//notify driver when passenger joings ride
-//display passenger in some sort of collapsable modals
-//notify passenger when driver departs (timeout)
-
-//firgure out how to make this the name of the current user from the user authentication
-var testUser = "Tyrion";
-var driversRef;
-=======
 // var firebaseConfig = {
 //     apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
 //     authDomain: "carpoolify.firebaseapp.com",
@@ -25,7 +15,6 @@ var driversRef;
 // firgure out how to make this the name of the current user from the user authentication
 //var testUser = "Tyrion";
 //var driversRef;
->>>>>>> dp_matchDrivers
 
 $("#goButton").on("click", function () {
     if (role === "driver") {

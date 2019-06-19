@@ -244,11 +244,7 @@ let checkUserName = () => {
 
 
 
-<<<<<<< HEAD
-        // ajax call to get car MPG via car ID, which is declared as T -------------------
-=======
-        setUsername(firstName);
->>>>>>> dp_matchDrivers
+        setUsername(userName);
 
         $.ajax({
           url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
