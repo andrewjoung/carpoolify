@@ -244,7 +244,11 @@ let checkUserName = () => {
 
 
 
+<<<<<<< HEAD
         // ajax call to get car MPG via car ID, which is declared as T -------------------
+=======
+        setUsername(firstName);
+>>>>>>> dp_matchDrivers
 
         $.ajax({
           url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
@@ -510,11 +514,13 @@ let checkedDriver = () => {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 let setUsername = (username) => {
-  localStorage.setItem("username", username);
+  sessionStorage.setItem("username", username);
+  // localStorage.setItem("username", username);
 }
 
 let fillUserName = () => {
-  $("#userName").val(localStorage.getItem("username"))
+  $("#userName").val(sessionStorage.getItem("username"))
+  // $("#userName").val(localStorage.getItem("username"))
 }
 
 fillUserName()

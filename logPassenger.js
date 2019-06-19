@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //TODO:
 //notify driver when passenger joings ride
 //display passenger in some sort of collapsable modals
@@ -6,6 +7,25 @@
 //firgure out how to make this the name of the current user from the user authentication
 var testUser = "Tyrion";
 var driversRef;
+=======
+// var firebaseConfig = {
+//     apiKey: "AIzaSyBxUaoNSvhJ13OIN9O_ryg6V9XFpABJYD0",
+//     authDomain: "carpoolify.firebaseapp.com",
+//     databaseURL: "https://carpoolify.firebaseio.com",
+//     projectId: "carpoolify",
+//     storageBucket: "",
+//     messagingSenderId: "144701142261",
+//     appId: "1:144701142261:web:8eb8f2f55b5181ac"
+// };
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+
+//var database = firebase.database();
+
+// firgure out how to make this the name of the current user from the user authentication
+//var testUser = "Tyrion";
+//var driversRef;
+>>>>>>> dp_matchDrivers
 
 $("#goButton").on("click", function () {
     if (role === "driver") {
@@ -24,8 +44,7 @@ $("#goButton").on("click", function () {
 // driver flow
 
 //
-function driverFlow() {
-    // TODO: prevent this 
+function driverFlow() { 
     $("#driverSubmitRide").attr("data-dismiss", "modal");
     promptDriverInput();
 }
@@ -345,6 +364,14 @@ function displayDriver(name, seats, driverOLat, driverOLong, driverDLat, driverD
     newDriver.append(driverName, domSeatsLeft, seatsBadge, estArrival);
     availableDrivers.append(newDriver);
     availableDrivers.css("display", "block");
+
+    var domTimeoutTime = moment(depart, "HH:mm");
+    var driverTimeFrame = domTimeoutTime.diff(moment(), "milliseconds");
+    console.log("driverTimeFrame for testing: " + driverTimeFrame);
+
+    setTimeout(function () {
+        $("#" + name).remove();
+    }, driverTimeFrame);
 }
 
 var driverClicked;
@@ -396,7 +423,7 @@ $("#driverConfirmButton").on("click", function() {
                     dbSeatsAvail: updatedSeats
                 });
             } else if (updatedSeats === 0) {
-                removeDriver();
+                removeDriver(driverClicked);
             }
         }
     });
@@ -406,7 +433,7 @@ function updateSeatCount(newSeatCount) {
     $("#" + driverClicked + "SeatsLeft").text(newSeatCount);
 }
 
-function removeDriver() {
-    $("#" + driverClicked).remove();
+function removeDriver(name) {
+    $("#" + name).remove();
 }
     
