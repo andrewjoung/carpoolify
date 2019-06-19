@@ -3,13 +3,67 @@ let looper = 0
 let j = 0;
 let username;
 var pricePerMile;
-returnMPG = (s) => {
-  console.log(s)
-  return s
+let database = firebase.database()
+// returnMPG = (s) => {
+//   console.log(s)
+//   return s
+// }
+
+let gasAjax = () => {
+  var gas;
+
+
+}
+// document.getElementById("driverCheckbox").checked = false;
+
+let carAjax = (year, make, model, gas) => {
+
 }
 
+$("#redirect-button").on("click", function () {
+  window.location.href = "index.html"
+})
 
-let database = firebase.database()
+
+
+
+
+$("#car-make-button").on("click", function () {
+
+  $("#second-input-hidden").css({ "position": "static", "opacity": "1", "transition": "opacity 1s linear" })
+  // $("#car-make-button").css("display", "none")
+
+  let make = $("#registerMake").val();
+  let year = $("#registeryear").val();
+  $.ajax({
+    url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=" + year + "&make=" + make,
+    method: "GET"
+  }).then(function (response) {
+    let resString = new XMLSerializer().serializeToString(response);
+    //  console.log(resString);
+    var result = parser.validate(resString);
+    // if (result !== true) console.log(result.err); 
+    var jsonObj = parser.parse(resString);
+    let loopMe = (jsonObj.menuItems.menuItem)
+    let lengthCheck = Object.keys(loopMe)
+    console.log(lengthCheck)
+
+    for (var i = 0; i < lengthCheck.length; i++) {
+      console.log("checked")
+      console.log(loopMe[i].text)
+      let option = $("<option>");
+      option.attr("value", loopMe[i].text)
+      option.attr("id", loopMe[i].text)
+      option.text(loopMe[i].text)
+      $("#make-select").append(option)
+    }
+
+
+
+
+  })
+
+})
 
 $.ajax({
   url: "https://www.fueleconomy.gov/ws/rest/fuelprices",
@@ -84,6 +138,7 @@ let checkUserName = () => {
   let phone = $("#registerPhone").val()
   let userName = $("#registerUserName").val()
   let license = $("#registerLicense").val()
+
   $.ajax({
     url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=" + year + "&make=" + make + "&model=" + model,
     method: "GET"
@@ -133,72 +188,82 @@ let checkUserName = () => {
 
   // let MPG = returnMPG(pricePerMile)
 
-  if ($('input[name="checkbox"]').is(":checked")) {
+  if ($('input[name="checkBox"]').is(":checked")) {
     driver = true;
 
   }
 
   else {
-    driver = false
+    driver = false;
   }
 
+  $.ajax({
+    url: "https://www.fueleconomy.gov/ws/rest/fuelprices",
+    method: "GET"
+  }).then(function (response) {
+    // console.log(response)
+    let resString = new XMLSerializer().serializeToString(response);
+    //  console.log(resString);
+    var result = parser.validate(resString);
+    // if (result !== true) console.log(result.err); 
+    var jsonObj = parser.parse(resString);
+    gas = (jsonObj.fuelPrices.midgrade)
+
+    if (year === "" || make === "") {
+      year = 2000;
+      make = "Subaru";
+      model = "Forester AWD"
+    }
 
 
-  setUsername(userName)
 
 
 
 
 
-  if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
-    document.getElementById("submit-button").disabled = true;
+    if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
+      document.getElementById("submit-button").disabled = true;
 
-    $(".container").attr("id", "shake-me")
-    $("#change-title").text("Please fill all fields")
-    $("#change-title").css("color", "red")
-    $("#transfer-button").attr("href", "#")
+      $.ajax({
+        url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=" + year + "&make=" + make + "&model=" + model,
+        method: "GET"
+      }).then(function (response) {
+        // console.log(response)
+        let resString = new XMLSerializer().serializeToString(response);
 
-    setTimeout(function () {
-      // document.getElementById("sign-in").disabled = false
-      $(".container").attr("id", "")
+        var result = parser.validate(resString);
+        // if (result !== true) console.log(result.err); 
+        var jsonObj = parser.parse(resString);
 
-
-    }, 1000)
-    setTimeout(function () {
-      document.getElementById("submit-button").disabled = false;
-      $("#change-title").css("color", "#1DB954")
-      $("#change-title").text("Sign Up")
-    }, 2000)
-  }
-
-  else {
+        // console.log(jsonObj.menuItems.menuItem[0].value)
+        let ID = (jsonObj.menuItems.menuItem[0].value)
+        console.log(ID)
 
 
-    let count = 0;
-    let looper = 0;
 
-    database.ref("accounts").on("value", function (data) {
 
-      looper++
 
-      let value = data.val()
-      console.log(data.val())
-      let keysArray = Object.keys(value);
 
-      for (var i = 0; i < keysArray.length; i++) {
+        setUsername(userName);
 
-        if (keysArray[i] === userName) {
+        $.ajax({
+          url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
+          method: "GET"
+        }).then(function (response) {
 
-          console.log("checked")
-          count = 1
-        }
-      }
+          let resString = new XMLSerializer().serializeToString(response);
 
-      if (count === 0) {
-        // console.log("pushing")
+          var result = parser.validate(resString);
+          // if (result !== true) console.log(result.err); 
+          var jsonObj = parser.parse(resString);
+          let MPG = (jsonObj.yourMpgVehicle.avgMpg)
 
-        database.ref("accounts").child(userName).push({
+          pricePerMile = gas / MPG
+          // console.log(pricePerMile)
 
+          // let userName = $("#registerUserName").val().trim()
+
+<<<<<<< HEAD
           firstName: firstName,
           lastName: lastName,
           username: userName,
@@ -214,55 +279,143 @@ let checkUserName = () => {
           MPG: pricePerMile,
           year:year,
           driver:driver
+=======
+          // console.log(returnMPG(pricePerMile))
+>>>>>>> c02ad9a3fda116cbf6b87c340b089914df8ebf9a
+
+          setUsername(userName)
+
+
+
+
+
+          if (firstName === "" || lastName === "" || email === "" || password === "" || address === "" || city === "" || state === "" || phone === "" || userName === "") {
+            document.getElementById("submit-button").disabled = true;
+
+            $(".container").attr("id", "shake-me")
+            $("#change-title").text("Please fill all fields")
+            $("#change-title").css("color", "red")
+            $("#transfer-button").attr("href", "#")
+
+            setTimeout(function () {
+              // document.getElementById("sign-in").disabled = false
+              $(".container").attr("id", "")
+
+
+            }, 1000)
+            setTimeout(function () {
+              document.getElementById("submit-button").disabled = false;
+              $("#change-title").css("color", "#1DB954")
+              $("#change-title").text("Sign Up")
+            }, 2000)
+          }
+
+          else {
+
+
+            let count = 0;
+            let looper = 0;
+
+            database.ref("accounts").on("value", function (data) {
+
+              looper++
+
+              let value = data.val()
+              console.log(data.val())
+              let keysArray = Object.keys(value);
+
+              for (var i = 0; i < keysArray.length; i++) {
+
+                if (keysArray[i] === userName) {
+
+                  console.log("checked")
+                  count = 1
+                }
+              }
+
+              if (count === 0) {
+                // console.log("pushing")
+
+                database.ref("accounts").child(userName).push({
+
+                  firstName: firstName,
+                  lastName: lastName,
+                  username: userName,
+                  email: email,
+                  password: password,
+                  address: address, city, state,
+                  phone: phone,
+                  license: license,
+                  carMake: make,
+                  carModel: model,
+                  MPG: pricePerMile,
+                  year: year,
+                  driver: driver
+
+
+
+
+                })
+
+                window.location.href = "index.html"
+                // console.log($("#transfer-button")[0])
+
+                // console.log("looping")
+              }
+
+              else if (count === 1 && looper === 1) {
+                // document.getElementById("sign-in").disabled = true
+                document.getElementById("submit-button").disabled = true;
+
+                $(".container").attr("id", "shake-me")
+                $("#change-title").text("Username is Unavailable")
+                $("#change-title").css("color", "red")
+                $("#transfer-button").attr("href", "#")
+
+
+
+
+
+                //Reset all text fields to empty
+                $("#registerEmail").val('')
+                $("#registerPassword").val('')
+                $("#registerAddress").val('')
+                $("#registerCity").val('')
+                $("#registerState").val('')
+                $("#registerPhone").val('')
+                $("#registerUserName").val('')
+                $("#registerFirstName").val('')
+                $("#registerLastName").val('')
+                setTimeout(function () {
+                  // document.getElementById("sign-in").disabled = false
+                  $(".container").attr("id", "")
+
+
+                }, 1000)
+                setTimeout(function () {
+                  document.getElementById("submit-button").disabled = false;
+                  $("#change-title").css("color", "#1DB954")
+                  $("#change-title").text("Sign Up")
+                }, 2000)
+              }
+            })
+          }
 
 
 
 
         })
+      })
 
-        window.location.href = "index.html"
-        // console.log($("#transfer-button")[0])
 
-        // console.log("looping")
-      }
-
-      else if (count === 1 && looper === 1) {
-        // document.getElementById("sign-in").disabled = true
-        document.getElementById("submit-button").disabled = true;
-
-        $(".container").attr("id", "shake-me")
-        $("#change-title").text("Username is Unavailable")
-        $("#change-title").css("color", "red")
-        $("#transfer-button").attr("href", "#")
+    }
+  })
 
 
 
 
 
-        //Reset all text fields to empty
-        $("#registerEmail").val('')
-        $("#registerPassword").val('')
-        $("#registerAddress").val('')
-        $("#registerCity").val('')
-        $("#registerState").val('')
-        $("#registerPhone").val('')
-        $("#registerUserName").val('')
-        $("#registerFirstName").val('')
-        $("#registerLastName").val('')
-        setTimeout(function () {
-          // document.getElementById("sign-in").disabled = false
-          $(".container").attr("id", "")
 
-
-        }, 1000)
-        setTimeout(function () {
-          document.getElementById("submit-button").disabled = false;
-          $("#change-title").css("color", "#1DB954")
-          $("#change-title").text("Sign Up")
-        }, 2000)
-      }
-    })
-  }
 }
 
 //main sign in page function
@@ -375,11 +528,13 @@ let checkedDriver = () => {
 // google.maps.event.addDomListener(window, 'load', initialize);
 
 let setUsername = (username) => {
-  localStorage.setItem("username", username);
+  sessionStorage.setItem("username", username);
+  // localStorage.setItem("username", username);
 }
 
 let fillUserName = () => {
-  $("#userName").val(localStorage.getItem("username"))
+  $("#userName").val(sessionStorage.getItem("username"))
+  // $("#userName").val(localStorage.getItem("username"))
 }
 
 fillUserName()

@@ -88,10 +88,19 @@ a{
 #second-input-hidden{
   position:absolute;
   opacity:0
+
 }
 
 #change-title-sign-in, #change-title {
   font-weight: 300;
   text-shadow: 2px 3px 10px black;
   font-family: 'Montserrat', sans-serif;
+
+}
+
+
+#redirect-button{
+  color:#1DB954;
+  background:black;
+  border:4px solid #1DB954;
 }

@@ -55,9 +55,16 @@ h1 {
     background-color: #1DB954;
     padding-bottom: 8px;
     margin-bottom: 0;
+<<<<<<< HEAD
     border-bottom: solid 1px white;
     color: white;
     font-family: 'Montserrat', sans-serif;
+=======
+    border-bottom: solid 1pt white;
+    min-width: 350px;
+    color: white;
+    font-weight: 200;
+>>>>>>> c02ad9a3fda116cbf6b87c340b089914df8ebf9a
 }
 
 .pac-container {
