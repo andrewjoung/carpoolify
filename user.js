@@ -28,77 +28,24 @@ database.ref("accounts").child(username).on("value", function (data) {
   $("#form4").val(`${keyName.address} ${keyName.city} ${keyName.state}`)
   $("#form5").val(keyName.password)
   $("#form3").val(keyName.lastName)
-})
-
-
-$("#username-button").on("click", function () {
-
-  if (a === 0) {
-    $("#form1").prop("disabled", false);
-    a = 1
+  if(keyName.driver === "false"){
+    $("#form7").val("No License Info")
+    $("#form8").val("No Car Make Info")
+    $("#form9").val("No Car Model Info")
+    $("#form10").val("No Car year Info")
+    $("#form11").val("No MPG Info")
   }
-  else if (a === 1) {
-    $("#form1").prop("disabled", true);
-    a = 0
-  }
-})
-
-
-$("#name-button").on("click", function () {
-  if (a === 0) {
-    $("#form2").prop("disabled", false);
-    a = 1
-  }
-  else if (a === 1) {
-    $("#form2").prop("disabled", true);
-    a = 0
-  }
-})
-
-$("#email-button").on("click", function () {
-  if (b === 0) {
-    $("#form3").prop("disabled", false);
-    b = 1
-  }
-  else if (b === 1) {
-    $("#form3").prop("disabled", true);
-    b = 0
-  }
-})
-
-$("#address-button").on("click", function () {
-  if (c === 0) {
-    $("#form4").prop("disabled", false);
-    c = 1
-  }
-  else if (c === 1) {
-    $("#form4").prop("disabled", true);
-    c = 0
-  }
-})
-
-$("#password-button").on("click", function () {
-  if (d === 0) {
-
-    $("#form5").attr("type", "text")
-    $("#form5").prop("disabled", false);
-    d = 1
-  }
-  else if (d === 1) {
-    $("#form5").prop("disabled", true);
-    $("#form5").attr("type", "password")
-    d = 0
+  else{
+    $("#form7").val(keyName.license)
+    $("#form8").val(keyName.carMake)
+    $("#form9").val(keyName.carModel)
+    $("#form10").val(keyName.year)
+    $("#form11").val(keyName.MPG)
   }
 })
 
 
-$("#save-changes").on("click", function () {
 
-
-  database.ref("accounts").child($("#form1").val()).push({
-
-  })
-})
 
 
 // database.ref("accounts").child(userName).push({
