@@ -134,16 +134,18 @@ let checkUserName = () => {
       let ID = (jsonObj.menuItems.menuItem[0].value)
       console.log(ID)
 
+      
+
 
 
 
       // ajax call to get car MPG via car ID, which is declared as T -------------------
 
       $.ajax({
-        url: `https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/${ID}`,
+        url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
         method: "GET"
       }).then(function (response) {
-        console.log(response)
+
         let resString = new XMLSerializer().serializeToString(response);
 
         var result = parser.validate(resString);
