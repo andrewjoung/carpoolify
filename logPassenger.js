@@ -45,7 +45,7 @@ function plotAndStartRoute() {
     //console.log("this is stupid: " + userDriver);
 
     //we'll have to change this to be "drivers/ + userDriver"
-    database.ref("drivers/Jon").on("value", function(snapshot) {
+    database.ref("drivers/" + userDriver).on("value", function(snapshot) {
 
         console.log("entering database");
         //riders have chosen to carpool and db has been populated with a waypoint child element
@@ -147,23 +147,49 @@ $("#driverSubmitRide").on("click", function () {
     $("#showPassengersButton").css('display', "block");
 });
 
+var userDriver = localStorage.getItem("username");
 //display riders on the drivers side when a rider joins a ride
-database.ref("drivers/Jon").on("value", function(snapshot) {
+
+var riderClickCounter = 0;
+
+database.ref("drivers/" + userDriver).on("value", function(snapshot) {
+
+    riderClickCounter++;
+
+    console.log("tlkjafl;sdjfldjs");
 
     //if riders have joined the ride
-    if(snapshot.child("ridingPassengers").exists()) {
+    if(snapshot.child("ridingPassengers").exists() && riderClickCounter % 3 === 0) {
         //populate the driver modal with the passengers
         var passengerModal = $("#waitingForPassengerContent");
+
         var dbRiders = snapshot.val()["ridingPassengers"];
-        for(var i = 0; i < dbRiders.length; i++) {
+        var dbRidersKeys = Object.keys(dbRiders);
+
+        for(var i = 0; i < dbRidersKeys.length; i++) {
+            console.log("for loop thing");
             var ridingPassengerDiv = $("<div>");
-            console.log(dbRiders[i]);
-            ridingPassengerDiv.text(dbRiders[i]);
+            var key = dbRidersKeys[i];
+            var riderName = snapshot.val()["ridingPassengers"][key];
+            console.log(riderName);
+            ridingPassengerDiv.html("<span class='riderNameSpan'>" + riderName + "</span> is riding with you");
             passengerModal.append(ridingPassengerDiv);
+
+            alert(riderName + " has joined your ride!");
         }
+
+        
     }
 });
 
+$("#showPassengersButton").on("click", function(event){
+
+    event.preventDefault();
+
+    console.log("entering show passenger button callback");
+
+    $("#waitingForPassengerModal").modal("show");
+});
 //---------------------------------------------------------------
 // passenger flow
 
