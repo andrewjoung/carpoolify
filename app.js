@@ -89,13 +89,13 @@ let checkUserName = () => {
 
   // let MPG = returnMPG(pricePerMile)
 
-  if ($('input[name="checkbox"]').is(":checked")) {
+  if ($('input[name="checkBox"]').is(":checked")) {
     driver = true;
 
   }
 
   else {
-    driver = false
+    driver = false;
   }
 
   $.ajax({
@@ -109,6 +109,12 @@ let checkUserName = () => {
     // if (result !== true) console.log(result.err); 
     var jsonObj = parser.parse(resString);
     gas = (jsonObj.fuelPrices.midgrade)
+
+    if(year === "" || make === ""){
+      year = 1985;
+      make = "ford";
+      model = "Laser"
+    }
 
 
 
@@ -126,7 +132,7 @@ let checkUserName = () => {
 
       // console.log(jsonObj.menuItems.menuItem[0].value)
       let ID = (jsonObj.menuItems.menuItem[0].value)
-      console.log(jsonObj)
+      console.log(ID)
 
 
 
@@ -134,9 +140,10 @@ let checkUserName = () => {
       // ajax call to get car MPG via car ID, which is declared as T -------------------
 
       $.ajax({
-        url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
+        url: `https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/${ID}`,
         method: "GET"
       }).then(function (response) {
+        console.log(response)
         let resString = new XMLSerializer().serializeToString(response);
 
         var result = parser.validate(resString);
