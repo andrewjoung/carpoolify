@@ -174,18 +174,25 @@ database.ref("drivers/" + userDriver).on("value", function(snapshot) {
         var dbRiders = snapshot.val()["ridingPassengers"];
         var dbRidersKeys = Object.keys(dbRiders);
 
+        passengerModal.empty();
+
         for(var i = 0; i < dbRidersKeys.length; i++) {
             console.log("for loop thing");
-            var ridingPassengerDiv = $("<div>");
             var key = dbRidersKeys[i];
+            //does not exist 
+
+            console.log($.contains(document, $("#" + snapshot.val()["ridingPassengers"][key])));
+            console.log("entering conditional testing testing");
+            var ridingPassengerDiv = $("<div>");
             var riderName = snapshot.val()["ridingPassengers"][key];
             console.log(riderName);
             ridingPassengerDiv.html("<span class='riderNameSpan'>" + riderName + "</span> is riding with you");
+            ridingPassengerDiv.attr("id", snapshot.val()["ridingPassengers"][key]);
             passengerModal.append(ridingPassengerDiv);
 
             alert(riderName + " has joined your ride!");
-        }
 
+        }
         
     }
 });
