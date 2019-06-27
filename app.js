@@ -20,7 +20,7 @@ let carAjax = (year, make, model, gas) => {
 
 }
 
-$("#redirect-button").on("click", function(){
+$("#redirect-button").on("click", function () {
   window.location.href = "index.html"
 })
 
@@ -114,7 +114,7 @@ let checkUserName = () => {
     var jsonObj = parser.parse(resString);
     gas = (jsonObj.fuelPrices.midgrade)
 
-    if(year === "" || make === ""){
+    if (year === "" || make === "") {
       year = 2000;
       make = "Subaru";
       model = "Forester AWD"
@@ -127,7 +127,7 @@ let checkUserName = () => {
       url: "https://www.fueleconomy.gov/ws/rest/vehicle/menu/options?year=" + year + "&make=" + make + "&model=" + model,
       method: "GET"
     }).then(function (response) {
-      // console.log(response)
+
       let resString = new XMLSerializer().serializeToString(response);
 
       var result = parser.validate(resString);
@@ -138,7 +138,7 @@ let checkUserName = () => {
       let ID = (jsonObj.menuItems.menuItem[0].value)
       console.log(ID)
 
-      
+
 
 
 
@@ -149,15 +149,20 @@ let checkUserName = () => {
         url: "https://www.fueleconomy.gov/ws/rest/ympg/shared/ympgVehicle/" + ID,
         method: "GET"
       }).then(function (response) {
+        if (response === undefined) {
+          pricePerMile = 0.13
+        }
+        else {
 
-        let resString = new XMLSerializer().serializeToString(response);
+          let resString = new XMLSerializer().serializeToString(response);
 
-        var result = parser.validate(resString);
-        // if (result !== true) console.log(result.err); 
-        var jsonObj = parser.parse(resString);
-        let MPG = (jsonObj.yourMpgVehicle.avgMpg)
+          var result = parser.validate(resString);
+          // if (result !== true) console.log(result.err); 
+          var jsonObj = parser.parse(resString);
+          let MPG = (jsonObj.yourMpgVehicle.avgMpg)
 
-        pricePerMile = gas / MPG
+          pricePerMile = gas / MPG
+        }
         // console.log(pricePerMile)
 
         // let userName = $("#registerUserName").val().trim()
